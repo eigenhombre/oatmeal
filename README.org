@@ -41,8 +41,9 @@ And then just type =oatmeal= to invoke the command.
 # BEGIN OATMEAL
 #+BEGIN_SRC
 
-Usage: oatmeal [options]
-       oatmeal make-readme
+Usage: oatmeal newlib <libname>
+       oatmeal newapp <appname>
+       oatmeal update-readme
 
 #+END_SRC
 # END OATMEAL HELP
