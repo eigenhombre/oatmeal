@@ -1,9 +1,10 @@
+.PHONY: all
 
 BINPATH = ${HOME}/bin
+JARPATH = target/uberjar/oatmeal.jar
+all: ${JARPATH}
 
-all: target/uberjar/oatmeal.jar
-
-target/uberjar/oatmeal.jar: src/oatmeal/*.clj
+${JARPATH}: src/oatmeal/*.clj
 	lein uberjar
 
 clean:
@@ -11,5 +12,7 @@ clean:
 
 install:
 	mkdir -p ${BINPATH}
-	cp target/uberjar/oatmeal.jar ${BINPATH}
+	cp ${JARPATH} ${BINPATH}
 
+doc: ${JARPATH}
+	java -jar ${JARPATH} make-readme

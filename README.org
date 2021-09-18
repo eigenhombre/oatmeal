@@ -9,7 +9,7 @@
 
 * oatmeal
 
-A tool for working with Common Lisp projects.
+An opinionated[fn::(Probably wrong opinions!)] tool for working with Common Lisp projects.
 
 Because I can't get my head around some of the others.
 
@@ -24,7 +24,6 @@ $ make install
 
 ** Running
 
-
 #+BEGIN_SRC
 $ java -jar ~/bin/oatmeal.jar
 #+END_SRC
@@ -36,6 +35,12 @@ alias oatmeal="java -jar ~/bin/oatmeal.jar"
 #+END_SRC
 
 And then just type =oatmeal= to invoke the command.
+
+** Usage
+
+# BEGIN OATMEAL
+Usage: eat your oatmeal every day
+# END OATMEAL HELP
 
 ** License
 
