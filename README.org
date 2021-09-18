@@ -40,7 +40,10 @@ And then just type =oatmeal= to invoke the command.
 
 # BEGIN OATMEAL
 #+BEGIN_SRC
-Usage: eat your oatmeal every day
+
+Usage: oatmeal [options]
+       oatmeal make-readme
+
 #+END_SRC
 # END OATMEAL HELP
 
