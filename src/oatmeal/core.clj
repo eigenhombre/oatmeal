@@ -10,7 +10,9 @@
     (string/replace orig-txt
                     #"(?ms)\# BEGIN OATMEAL.*END OATMEAL"
                     (string/join "\n" ["# BEGIN OATMEAL"
+                                       "#+BEGIN_SRC"
                                        usage-txt
+                                       "#+END_SRC"
                                        "# END OATMEAL"]))))
 
 (defn replace-usage []

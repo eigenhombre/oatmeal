@@ -5,6 +5,8 @@
 /checkouts
 /classes
 /target
+README.html
+README.pdf
 pom.xml
 pom.xml.asc
 profiles.clj
