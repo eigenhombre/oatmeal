@@ -1,0 +1,53 @@
+#+TITLE: oatmeal
+
+#+OPTIONS: toc:nil num:nil
+
+#+BEGIN_QUOTE
+"Lisp has all the visual appeal of oatmeal with fingernail clippings mixed in."
+-- Larry Wall
+#+END_QUOTE
+
+* oatmeal
+
+A tool for working with Common Lisp projects.
+
+Because I can't get my head around some of the others.
+
+** Building
+
+(On MacOS; your mileage may vary on other platforms.) First install Java and [[https://leiningen.org/][Leiningen]].
+
+#+BEGIN_SRC
+$ make
+$ make install
+#+END_SRC
+
+** Running
+
+
+#+BEGIN_SRC
+$ java -jar ~/bin/oatmeal.jar
+#+END_SRC
+
+Or, add the following to your shell profile:
+
+#+BEGIN_SRC
+alias oatmeal="java -jar ~/bin/oatmeal.jar"
+#+END_SRC
+
+And then just type =oatmeal= to invoke the command.
+
+** License
+
+Copyright © 2021 John Jacobsen
+
+This program and the accompanying materials are made available under the
+terms of the Eclipse Public License 2.0 which is available at
+http://www.eclipse.org/legal/epl-2.0.
+
+This Source Code may also be made available under the following Secondary
+Licenses when the conditions for such availability set forth in the Eclipse
+Public License, v. 2.0 are satisfied: GNU General Public License as published by
+the Free Software Foundation, either version 2 of the License, or (at your
+option) any later version, with the GNU Classpath Exception which is available
+at https://www.gnu.org/software/classpath/license.html.
