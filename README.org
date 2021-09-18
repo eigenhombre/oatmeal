@@ -38,9 +38,17 @@ And then just type =oatmeal= to invoke the command.
 
 ** Usage
 
+#+BEGIN_SRC
 # BEGIN OATMEAL
 Usage: eat your oatmeal every day
 # END OATMEAL HELP
+#+END_SRC
+
+To update this file (README.org), simply:
+#+BEGIN_SRC
+make doc
+#+END_SRC
+
 
 ** License
 
