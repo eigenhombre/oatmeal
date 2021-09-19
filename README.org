@@ -11,7 +11,11 @@
 
 An opinionated(*) tool for working with Common Lisp projects.
 
-Because I can't get my head around some of the others.
+Because I can't get my head around some of the others.  Yes, I'm aware
+of =quickproject=.  I want to set things up a little differently and
+add some functionality around adding and removing dependencies.  THIS
+IS VAPORWARE, VERY EARLY ON IN THE PROJECT, PROBABLY MESSED UP, DON'T
+USE IT.
 
 (*) (Probably /wrong/ opinions...)
 
@@ -59,6 +63,12 @@ To update this file (README.org), simply:
 make doc
 #+END_SRC
 
+*** Future use cases
+
+- Actually make running libraries/projects
+- Add dependencies
+- Add building of binaries
+- ...
 
 ** License
 
