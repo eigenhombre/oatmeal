@@ -1,6 +1,7 @@
 (ns oatmeal.core
   (:require [clojure.string :as string]
             [docopt.core :as docopt]
+            [environ.core :as env]
             [oatmeal.fs :as fs]
             [oatmeal.readme :as r])
   (:gen-class))
@@ -11,11 +12,12 @@ Usage: oatmeal create lib <libname>
        oatmeal create app <appname>
        oatmeal update readme
 
-Sources will be created in \\$OATMEAL_DIR; if not present,
-\\$HOME/common-lisp will be used.
+Sources will be created in directory specified by the environment
+variable OATMEAL_DIR; if not present, a directory \"common-lisp\" in
+the user's home directory will be used.
 ")
 
-(defn -main [& args]
+(defn execute-cmd [env args]
   (docopt/docopt usage
                  args
                  (fn [{:strs [update readme
@@ -23,9 +25,12 @@ Sources will be created in \\$OATMEAL_DIR; if not present,
                               <appname>] :as argmap}]
                    (cond
                      (and update readme) (r/update-readme! usage)
-                     <libname> (fs/make-lib <libname>)
-                     <appname> (fs/make-app <appname>)
+                     <libname> (fs/make-lib env <libname>)
+                     <appname> (fs/make-app env <appname>)
                      :else (println usage)))))
+
+(defn -main [& args]
+  (execute-cmd env/env args))
 
 (comment
   (-main "create" "lib" "fooboo")

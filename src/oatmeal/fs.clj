@@ -9,9 +9,16 @@
          ;; FIXME: Eliminate double-evaluation:
          (fs/delete-dir ~dir-file)))))
 
-(defn make-lib [libname]
-  (println "LIB" libname))
+(defn lisp-toplevel-dir [{:keys [oatmeal-dir] :as env}]
+  (or oatmeal-dir (str (:home env) "/common-lisp")))
 
-(defn make-app [appname]
-  (println "APP" appname))
+(defn make-lib [env libname]
+  (let [tldir (lisp-toplevel-dir env)]
+    (fs/mkdir (str tldir "/" libname))
+    (println "LIB" libname "in directory" tldir)))
+
+(defn make-app [env appname]
+  (let [tldir (lisp-toplevel-dir env)]
+    (fs/mkdir (str tldir "/" appname))
+    (println "APP" appname "in directory" tldir)))
 
