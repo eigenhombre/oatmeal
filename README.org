@@ -9,9 +9,11 @@
 
 * oatmeal
 
-An opinionated[fn::(Probably wrong opinions!)] tool for working with Common Lisp projects.
+An opinionated(*) tool for working with Common Lisp projects.
 
 Because I can't get my head around some of the others.
+
+(*) (Probably /wrong/ opinions...)
 
 ** Building
 

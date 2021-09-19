@@ -7,9 +7,12 @@
 
 (def usage
   "
-Usage: oatmeal newlib <libname>
-       oatmeal newapp <appname>
+Usage: oatmeal lib <libname>
+       oatmeal app <appname>
        oatmeal update-readme
+
+Sources will be created in $OATMEAL_DIR; if not present,
+$HOME/common-lisp will be used.
 ")
 
 (defn -main
