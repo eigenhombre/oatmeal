@@ -11,8 +11,8 @@ Usage: oatmeal create lib <libname>
        oatmeal create app <appname>
        oatmeal update readme
 
-Sources will be created in $OATMEAL_DIR; if not present,
-$HOME/common-lisp will be used.
+Sources will be created in \\$OATMEAL_DIR; if not present,
+\\$HOME/common-lisp will be used.
 ")
 
 (defn -main [& args]

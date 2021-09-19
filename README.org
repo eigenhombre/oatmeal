@@ -40,11 +40,18 @@ And then just type =oatmeal= to invoke the command.
 
 ** Usage
 
-# BEGIN OATMEAL
+# BEGIN OATMEAL USAGE
 #+BEGIN_SRC
-HIHI
+
+Usage: oatmeal create lib <libname>
+       oatmeal create app <appname>
+       oatmeal update readme
+
+Sources will be created in $OATMEAL_DIR; if not present,
+$HOME/common-lisp will be used.
+
 #+END_SRC
-# END OATMEAL HELP
+# END OATMEAL USAGE USAGE
 
 To update this file (README.org), simply:
 #+BEGIN_SRC
