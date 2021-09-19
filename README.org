@@ -47,11 +47,12 @@ Usage: oatmeal create lib <libname>
        oatmeal create app <appname>
        oatmeal update readme
 
-Sources will be created in $OATMEAL_DIR; if not present,
-$HOME/common-lisp will be used.
+Sources will be created in directory specified by the environment
+variable OATMEAL_DIR; if not present, a directory "common-lisp" in
+the user's home directory will be used.
 
 #+END_SRC
-# END OATMEAL USAGE USAGE
+# END OATMEAL USAGE
 
 To update this file (README.org), simply:
 #+BEGIN_SRC
