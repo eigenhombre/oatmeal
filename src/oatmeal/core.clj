@@ -7,29 +7,27 @@
 
 (def usage
   "
-Usage: oatmeal lib <libname>
-       oatmeal app <appname>
-       oatmeal update-readme
+Usage: oatmeal create lib <libname>
+       oatmeal create app <appname>
+       oatmeal update readme
 
 Sources will be created in $OATMEAL_DIR; if not present,
 $HOME/common-lisp will be used.
 ")
 
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
+(defn -main [& args]
   (docopt/docopt usage
                  args
-                 (fn [{:strs [update-readme
+                 (fn [{:strs [update readme
                               <libname>
                               <appname>] :as argmap}]
                    (cond
-                     update-readme (r/update-readme! usage)
+                     (and update readme) (r/update-readme! usage)
                      <libname> (fs/make-lib <libname>)
                      <appname> (fs/make-app <appname>)
                      :else (println usage)))))
 
 (comment
-  (-main "newlib" "fooboo")
-  (-main "newapp" "fooapp")
-  (-main "update-readme"))
+  (-main "create" "lib" "fooboo")
+  (-main "create" "app" "fooapp")
+  (-main "update" "readme"))

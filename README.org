@@ -42,11 +42,7 @@ And then just type =oatmeal= to invoke the command.
 
 # BEGIN OATMEAL
 #+BEGIN_SRC
-
-Usage: oatmeal newlib <libname>
-       oatmeal newapp <appname>
-       oatmeal update-readme
-
+HIHI
 #+END_SRC
 # END OATMEAL HELP
 

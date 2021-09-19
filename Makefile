@@ -15,4 +15,4 @@ install:
 	cp ${JARPATH} ${BINPATH}
 
 doc: ${JARPATH}
-	java -jar ${JARPATH} make-readme
+	java -jar ${JARPATH} update readme

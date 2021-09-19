@@ -3,7 +3,7 @@
 
 (defn readme-txt [orig-txt usage]
   (string/replace orig-txt
-                  #"(?ms)\# BEGIN OATMEAL.*END OATMEAL"
+                  #"(?:ms)\# BEGIN OATMEAL.*END OATMEAL"
                   (string/join "\n" ["# BEGIN OATMEAL"
                                      "#+BEGIN_SRC"
                                      usage
