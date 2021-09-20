@@ -9,9 +9,8 @@
 
 * oatmeal
 
-#+BEGIN_EXPORT html
-<img src="./maipian.png" width="120px"/>
-#+END_EXPORT
+#+ATTR_ORG: :width 100
+[[./maipian.png]]
 
 An opinionated(*) tool for working with Common Lisp projects.
 
