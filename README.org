@@ -9,7 +9,7 @@
 
 * oatmeal
 
-#+ATTR_ORG: :width 500
+#+ATTR_HTML: :width 300 :style border:2px solid black;
 [[./maipian.png]]
 
 An opinionated(*) tool for working with Common Lisp projects.
