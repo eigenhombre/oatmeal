@@ -63,6 +63,35 @@ To update this file (README.org), simply:
 make doc
 #+END_SRC
 
+** Example
+#+BEGIN_SRC
+$  oatmeal create app cranky
+APP cranky in directory /Users/jacobsen/Programming/Lisp/common-lisp
+$  cd cranky
+$  ls
+Makefile	build.sh	main.lisp
+$  make
+./build.sh
+This is SBCL 2.1.8, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+[undoing binding stack and other enclosing state... done]
+[performing final GC... done]
+[saving current Lisp image into cranky:
+writing 1728 bytes from the read-only space at 0x300000000
+writing 1840 bytes from the static space at 0x300200000
+writing 0 bytes from the immobile space at 0x300300000
+writing 41418752 bytes from the dynamic space at 0x7003000000
+done]
+$  ./cranky
+Hello World
+$
+#+END_SRC
+
 *** Future use cases
 
 - Actually make running libraries/projects
