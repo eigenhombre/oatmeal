@@ -21,9 +21,11 @@ USE IT.
 
 (*) (Probably /wrong/ opinions...)
 
-** Building
+** Prerequisites
 
 (On MacOS; your mileage may vary on other platforms.) First install Java and [[https://leiningen.org/][Leiningen]].  Then =brew install sbcl=.
+
+** Building
 
 #+BEGIN_SRC
 $ make
