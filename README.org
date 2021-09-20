@@ -9,7 +9,9 @@
 
 * oatmeal
 
-[[./maipian.png]]
+#+BEGIN_EXPORT html
+<img src="./maipian.png" width="120px"/>
+#+END_EXPORT
 
 An opinionated(*) tool for working with Common Lisp projects.
 
