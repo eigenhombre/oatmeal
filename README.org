@@ -92,11 +92,11 @@ Hello World
 $
 #+END_SRC
 
-*** Future use cases
+** Future use cases
 
-- Actually make running libraries/projects
 - Add dependencies
-- Add building of binaries
+- Finish "create library" feature
+- Handle whole ASDF / packages / quicklisp thing
 - ...
 
 ** License
