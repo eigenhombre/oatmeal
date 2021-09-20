@@ -1,7 +1,7 @@
 (ns oatmeal.fs
   (:require [me.raynes.fs :as fs]
             [clojure.java.io :as io]
-            [clostache.parser :as p]))
+            [clostache.parser :refer [render]]))
 
 (defmacro with-tmp-dir [dir-file & body]
   `(let [~dir-file (fs/temp-dir "oatmeal")]
@@ -32,12 +32,12 @@
         target (str tldir "/" projname)]
     (fs/mkdir target)
     (spit (str target "/Makefile")
-          (p/render (resource-file "Makefile.app")
-                    {:progname projname}))
+          (render (resource-file "Makefile.app")
+                  {:progname projname}))
     (spit (str target "/main.lisp")
           "(defun main () (format t \"Hello World~%\"))\n")
     (spit (str target "/build.sh")
-          (p/render (resource-file "build.sh")
-                    {:progname projname}))
+          (render (resource-file "build.sh")
+                  {:progname projname}))
     (fs/chmod "+x" (str target "/build.sh"))
     (println "APP" projname "in directory" tldir)))

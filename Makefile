@@ -2,9 +2,8 @@
 
 BINPATH = ${HOME}/bin
 JARPATH = target/uberjar/oatmeal.jar
-all: ${JARPATH}
 
-${JARPATH}: src/oatmeal/*.clj
+${JARPATH}: src/oatmeal/*.clj project.clj resources/*
 	lein uberjar
 
 clean:
@@ -16,3 +15,5 @@ install:
 
 doc: ${JARPATH}
 	java -jar ${JARPATH} update readme
+
+all: ${JARPATH} doc install
