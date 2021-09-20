@@ -23,7 +23,7 @@ USE IT.
 
 ** Building
 
-(On MacOS; your mileage may vary on other platforms.) First install Java and [[https://leiningen.org/][Leiningen]].
+(On MacOS; your mileage may vary on other platforms.) First install Java and [[https://leiningen.org/][Leiningen]].  Then `brew install sbcl`.
 
 #+BEGIN_SRC
 $ make
