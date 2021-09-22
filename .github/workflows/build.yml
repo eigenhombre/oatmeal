@@ -1,0 +1,13 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
