@@ -9,13 +9,6 @@
 
 * oatmeal
 
-HACK
-
-https://github.com/eigenhombre/oatmeal/actions/workflows/build.yml/badge.svg?branch=master]]
-[[https://github.com/eigenhombre/oatmeal/actions/workflows/build.yml/badge.svg?branch=master][https://github.com/eigenhombre/oatmeal/actions/workflows/build.yml]]
-
-HACK
-
 [[./maipian.png]]
 
 An opinionated(*) tool for working with Common Lisp projects.
