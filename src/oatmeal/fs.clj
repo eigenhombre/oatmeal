@@ -33,6 +33,7 @@
         target (str tldir "/" projname)
         makefile-path (str target "/Makefile")]
     (io/make-parents makefile-path)
+    (/ 1 0)
     (spit makefile-path
           (render (resource-file "Makefile.app")
                   {:progname projname}))
