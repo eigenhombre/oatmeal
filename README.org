@@ -11,8 +11,6 @@
 
 [[./maipian.png]]
 
-@@html:<a href='https://github.com/eigenhombre/oatmeal/actions/workflows/build.yml'><img src='https://github.com/eigenhombre/oatmeal/actions/workflows/build.yml/badge.svg?branch=master'/></a>@@
-
 An opinionated(*) tool for working with Common Lisp projects.
 
 Because I can't get my head around some of the others.  Yes, I'm aware
