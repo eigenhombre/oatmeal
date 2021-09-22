@@ -20,18 +20,20 @@
 ;; FIXME: Move these elsewhere:
 (defn make-lib [env projname]
   (let [tldir (lisp-toplevel-dir env)
-        target (str tldir "/" projname)]
-    (fs/mkdir target)
-    (spit (str target "/Makefile") "")
+        target (str tldir "/" projname)
+        makefile-path (str target "/Makefile")]
+    (io/make-parents makefile-path)
+    (spit makefile-path "")
     (spit (str target "/main.lisp") "(format t \"Hello World~%\")\n")
     (println "LIB" projname "in directory" tldir)))
 
 ;; FIXME: Move these elsewhere:
 (defn make-app [env projname]
   (let [tldir (lisp-toplevel-dir env)
-        target (str tldir "/" projname)]
-    (fs/mkdir target)
-    (spit (str target "/Makefile")
+        target (str tldir "/" projname)
+        makefile-path (str target "/Makefile")]
+    (io/make-parents makefile-path)
+    (spit makefile-path
           (render (resource-file "Makefile.app")
                   {:progname projname}))
     (spit (str target "/main.lisp")

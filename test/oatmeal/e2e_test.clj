@@ -39,4 +39,7 @@
                   (is (seq out))
                   (is (empty? err)))))
             ;; YAH: Next item: `make clean`
-            ))))))
+            ))
+        (testing "Just creating the project files, but in a deeply nested path"
+          (cmd {:oatmeal-dir (str d "/a/nested/sub/directory")}
+               (str "create " (name kind) " foo")))))))
