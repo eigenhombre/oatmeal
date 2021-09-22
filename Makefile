@@ -1,4 +1,5 @@
 .PHONY: all
+.PHONY: docker
 
 BINPATH = ${HOME}/bin
 JARPATH = target/uberjar/oatmeal.jar
@@ -17,3 +18,6 @@ doc: ${JARPATH}
 	java -jar ${JARPATH} update readme
 
 all: ${JARPATH} doc install
+
+docker:
+	docker build -t "oatmeal" .

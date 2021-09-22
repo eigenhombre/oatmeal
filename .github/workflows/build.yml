@@ -12,3 +12,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Docker build
+        run: |
+          make docker
