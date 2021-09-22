@@ -98,7 +98,7 @@ $
 
 ** Future Work
 
-See [[issues list][https://github.com/eigenhombre/oatmeal/issues]].
+See [[https://github.com/eigenhombre/oatmeal/issues][issues list]].
 
 ** License
 
