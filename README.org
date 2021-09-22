@@ -9,6 +9,13 @@
 
 * oatmeal
 
+HACK
+
+https://github.com/eigenhombre/oatmeal/actions/workflows/build.yml/badge.svg?branch=master]]
+[[https://github.com/eigenhombre/oatmeal/actions/workflows/build.yml/badge.svg?branch=master][https://github.com/eigenhombre/oatmeal/actions/workflows/build.yml]]
+
+HACK
+
 [[./maipian.png]]
 
 An opinionated(*) tool for working with Common Lisp projects.
@@ -114,3 +121,12 @@ Public License, v. 2.0 are satisfied: GNU General Public License as published by
 the Free Software Foundation, either version 2 of the License, or (at your
 option) any later version, with the GNU Classpath Exception which is available
 at https://www.gnu.org/software/classpath/license.html.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF THIRD PARTY RIGHTS. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
