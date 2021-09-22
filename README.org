@@ -96,12 +96,9 @@ Hello World
 $
 #+END_SRC
 
-** Future use cases
+** Future Work
 
-- Add dependencies
-- Finish "create library" feature
-- Handle whole ASDF / packages / quicklisp thing
-- ...
+See [[issues list][https://github.com/eigenhombre/oatmeal/issues]].
 
 ** License
 
