@@ -13,4 +13,5 @@
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}
              :dev {:plugins [[lein-bikeshed "0.5.2"]
+                             [jonase/eastwood "0.9.9"]
                              [lein-kibit "0.1.8"]]}})
