@@ -21,6 +21,8 @@
             (is (.exists (io/file (str d "/foo/Makefile")))))
           (testing "There is a main.lisp"
             (is (.exists (io/file (str d "/foo/main.lisp")))))
+          (testing "There is a package.lisp"
+            (is (.exists (io/file (str d "/foo/package.lisp")))))
           (when (= kind :app)
             (testing "There is a build.sh"
               (is (.exists (io/file (str d "/foo/build.sh")))))
