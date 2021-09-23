@@ -2,7 +2,7 @@
   (:require [clojure.string :as string]
             [docopt.core :as docopt]
             [environ.core :as env]
-            [oatmeal.fs :as fs]
+            [oatmeal.build :as b]
             [oatmeal.readme :as r])
   (:gen-class))
 
@@ -25,8 +25,8 @@ the user's home directory will be used.
                               <appname>] :as argmap}]
                    (cond
                      (and update readme) (r/update-readme! usage)
-                     <libname> (fs/make-lib env <libname>)
-                     <appname> (fs/make-app env <appname>)
+                     <libname> (b/make-lib env <libname>)
+                     <appname> (b/make-app env <appname>)
                      :else (println usage)))))
 
 (defn -main [& args]

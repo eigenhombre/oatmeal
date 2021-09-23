@@ -13,35 +13,48 @@
   (doseq [kind [:lib :app]]
     (testing (str "Making a new " (name kind) "project")
       (fs/with-tmp-dir d
-        (testing "It should create a directory called `foo`"
-          (cmd {:oatmeal-dir (str d)} (str "create " (name kind) " foo"))
-          (testing "The project directory exists"
-            (is (.exists (io/file (str d "/foo")))))
-          (testing "There is a Makefile"
-            (is (.exists (io/file (str d "/foo/Makefile")))))
-          (testing "There is a main.lisp"
-            (is (.exists (io/file (str d "/foo/main.lisp")))))
-          (testing "There is a package.lisp"
-            (is (.exists (io/file (str d "/foo/package.lisp")))))
-          (when (= kind :app)
-            (testing "There is a build.sh"
-              (is (.exists (io/file (str d "/foo/build.sh")))))
-            (testing "Building it doesn't barf"
-              (let [{:keys [exit out err]}
-                    (shell/sh "make" :dir (str d "/foo"))]
-                (testing "Make succeeded"
-                  (is (zero? exit))
-                  (is (seq out))
-                  (is (empty? err)))))
-            (testing "Running it works"
-              (let [{:keys [exit out err]}
-                    (shell/sh "./foo" :dir (str d "/foo"))]
-                (testing "Execution succeeded"
-                  (is (zero? exit))
-                  (is (seq out))
-                  (is (empty? err)))))
-            ;; YAH: Next item: `make clean`
-            ))
+        (let [exists (fn [suffix]
+                       (->> suffix
+                            (str d)
+                            io/file
+                            .exists))]
+          (testing "It should create a directory called `foo`"
+            (cmd {:oatmeal-dir (str d)} (str "create " (name kind) " foo"))
+            (testing "The project directory exists"
+              (is (exists "/foo")))
+            (testing "There is a Makefile"
+              (is (exists "/foo/Makefile")))
+            (testing "There is a main.lisp"
+              (is (exists "/foo/main.lisp")))
+            (testing "There is a package.lisp"
+              (is (exists "/foo/package.lisp")))
+            (when (= kind :app)
+              (testing "There is a build.sh"
+                (is (exists "/foo/build.sh")))
+              (testing "Building it doesn't barf"
+                (let [{:keys [exit out err]}
+                      (shell/sh "make" :dir (str d "/foo"))]
+                  (testing "Make succeeded"
+                    (is (zero? exit))
+                    (is (seq out))
+                    (is (empty? err))
+                    (testing "It built an executable"
+                      (is (exists "/foo/foo"))))))
+              (testing "Running it works"
+                (let [{:keys [exit out err]}
+                      (shell/sh "./foo" :dir (str d "/foo"))]
+                  (testing "Execution succeeded"
+                    (is (zero? exit))
+                    (is (seq out))
+                    (is (empty? err)))))
+              (testing "`make clean`"
+                (let [{:keys [exit out err]}
+                      (shell/sh "make" "clean"
+                                :dir (str d "/foo"))]
+                  (testing "It succeeded"
+                    (is (zero? exit))
+                    (is (empty? err))
+                    (is (not (exists "/foo/foo")))))))))
         (testing "Just creating the project files, but in a deeply nested path"
           (cmd {:oatmeal-dir (str d "/a/nested/sub/directory")}
                (str "create " (name kind) " foo")))))))

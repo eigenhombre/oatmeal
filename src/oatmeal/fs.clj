@@ -1,7 +1,6 @@
 (ns oatmeal.fs
-  (:require [me.raynes.fs :as fs]
-            [clojure.java.io :as io]
-            [clostache.parser :refer [render]]))
+  (:require [clojure.java.io :as io]
+            [me.raynes.fs :as fs]))
 
 (defmacro with-tmp-dir [dir-file & body]
   `(let [~dir-file (fs/temp-dir "oatmeal")]
@@ -17,35 +16,5 @@
 (defn resource-file [path]
   (slurp (io/resource path)))
 
-;; FIXME: Move these elsewhere:
-(defn make-lib [env projname]
-  (let [tldir (lisp-toplevel-dir env)
-        target (str tldir "/" projname)
-        makefile-path (str target "/Makefile")]
-    (io/make-parents makefile-path)
-    (spit makefile-path "")
-    (spit (str target "/main.lisp") "(format t \"Hello World~%\")\n")
-    (spit (str target "/package.lisp")
-          (render (resource-file "package.lisp")
-                  {:progname projname}))
-    (println "LIB" projname "in directory" tldir)))
-
-;; FIXME: Move these elsewhere:
-(defn make-app [env projname]
-  (let [tldir (lisp-toplevel-dir env)
-        target (str tldir "/" projname)
-        makefile-path (str target "/Makefile")
-        render-w-projname (fn [outfile]
-                            (spit (str target "/" outfile)
-                                  (render (resource-file outfile)
-                                          {:progname projname})))]
-    (io/make-parents makefile-path)
-    (spit makefile-path
-          (render (resource-file "Makefile.app")
-                  {:progname projname}))
-    (doseq [f ["main.lisp"
-               "build.sh"
-               "package.lisp"]]
-      (render-w-projname f))
-    (fs/chmod "+x" (str target "/build.sh"))
-    (println "APP" projname "in directory" tldir)))
+(defn mkdirp [path]
+  (io/make-parents (str path "/dummy")))
