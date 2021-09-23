@@ -13,4 +13,4 @@ COPY project.clj /oatmeal/project.clj
 RUN lein do clean, deps
 
 COPY . /oatmeal
-RUN lein test
+RUN make test

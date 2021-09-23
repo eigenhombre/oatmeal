@@ -1,5 +1,6 @@
 .PHONY: all
 .PHONY: docker
+.PHONY: test
 
 BINPATH = ${HOME}/bin
 JARPATH = target/uberjar/oatmeal.jar
@@ -21,3 +22,6 @@ all: ${JARPATH} doc install
 
 docker:
 	docker build -t "oatmeal" .
+
+test:
+	lein do test, bikeshed, kibit

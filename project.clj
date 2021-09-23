@@ -11,4 +11,6 @@
   :main ^:skip-aot oatmeal.core
   :uberjar-name "oatmeal.jar"
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:uberjar {:aot :all}
+             :dev {:plugins [[lein-bikeshed "0.5.2"]
+                             [lein-kibit "0.1.8"]]}})

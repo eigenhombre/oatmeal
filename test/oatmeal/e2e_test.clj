@@ -1,6 +1,6 @@
 (ns oatmeal.e2e-test
   (:require [clojure.string :as string]
-            [clojure.test :refer [deftest testing is are]]
+            [clojure.test :refer [deftest testing is]]
             [oatmeal.core :refer [execute-cmd]]
             [oatmeal.fs :as fs]
             [clojure.java.io :as io]
@@ -48,7 +48,7 @@
                     (is (seq out))
                     (is (empty? err)))))
               (testing "`make clean`"
-                (let [{:keys [exit out err]}
+                (let [{:keys [exit err]}
                       (shell/sh "make" "clean"
                                 :dir (str d "/foo"))]
                   (testing "It succeeded"

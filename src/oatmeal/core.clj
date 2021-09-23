@@ -1,6 +1,5 @@
 (ns oatmeal.core
-  (:require [clojure.string :as string]
-            [docopt.core :as docopt]
+  (:require [docopt.core :as docopt]
             [environ.core :as env]
             [oatmeal.build :as b]
             [oatmeal.readme :as r])
@@ -22,7 +21,7 @@ the user's home directory will be used.
                  args
                  (fn [{:strs [update readme
                               <libname>
-                              <appname>] :as argmap}]
+                              <appname>]}]
                    (cond
                      (and update readme) (r/update-readme! usage)
                      <libname> (b/make-lib env <libname>)

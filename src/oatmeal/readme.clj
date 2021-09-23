@@ -13,4 +13,3 @@
 (defn update-readme! [usage]
   (let [orig-txt (slurp "README.org")]
     (spit "README.org" (readme-txt orig-txt usage))))
-
