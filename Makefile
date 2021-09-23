@@ -18,7 +18,7 @@ install:
 doc: ${JARPATH}
 	java -jar ${JARPATH} update readme
 
-all: ${JARPATH} doc install
+all: test ${JARPATH} doc install
 
 docker:
 	docker build -t "oatmeal" .
