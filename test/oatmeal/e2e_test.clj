@@ -9,11 +9,12 @@
   (:import [java.nio.file FileAlreadyExistsException]))
 
 (defn cmd [env s]
-  (execute-cmd env (string/split s #"\s+")))
+  (with-out-str
+    (execute-cmd env (string/split s #"\s+"))))
 
 (deftest e2etests-common
   (doseq [kind [:lib :app]]
-    (testing (str "Making a new " (name kind) "project")
+    (testing (str "Making a new " (name kind) " project")
       (fs/with-tmp-dir d
         (let [exists (fn [suffix]
                        (->> suffix
@@ -22,7 +23,7 @@
                             .exists))]
           (testing "The directory already exists"
             (mkdirp (str d "/baz"))
-            (testing "Exception is thrown"
+            (testing "... exception is thrown"
               (is (thrown? FileAlreadyExistsException
                            (cmd {:oatmeal-dir (str d)}
                                 (str "create " (name kind) " baz"))))))

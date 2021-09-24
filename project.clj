@@ -11,7 +11,9 @@
   :main ^:skip-aot oatmeal.core
   :uberjar-name "oatmeal.jar"
   :target-path "target/%s"
+  :aliases {"kaocha" ["with-profile" "+kaocha" "run" "-m" "kaocha.runner"]}
   :profiles {:uberjar {:aot :all}
+             :kaocha {:dependencies [[lambdaisland/kaocha "1.0.887"]]}
              :dev {:plugins [[lein-bikeshed "0.5.2"]
                              [jonase/eastwood "0.9.9"]
                              [lein-kibit "0.1.8"]]}})
