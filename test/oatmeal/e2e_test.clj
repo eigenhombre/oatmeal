@@ -1,10 +1,12 @@
 (ns oatmeal.e2e-test
-  (:require [clojure.string :as string]
+  (:require [clojure.java.io :as io]
+            [clojure.java.shell :as shell]
+            [clojure.string :as string]
             [clojure.test :refer [deftest testing is]]
             [oatmeal.core :refer [execute-cmd]]
-            [oatmeal.fs :as fs]
-            [clojure.java.io :as io]
-            [clojure.java.shell :as shell]))
+            [oatmeal.fs :refer [mkdirp]]
+            [oatmeal.fs :as fs])
+  (:import [java.nio.file FileAlreadyExistsException]))
 
 (defn cmd [env s]
   (execute-cmd env (string/split s #"\s+")))
@@ -18,6 +20,12 @@
                             (str d)
                             io/file
                             .exists))]
+          (testing "The directory already exists"
+            (mkdirp (str d "/baz"))
+            (testing "Exception is thrown"
+              (is (thrown? FileAlreadyExistsException
+                           (cmd {:oatmeal-dir (str d)}
+                                (str "create " (name kind) " baz"))))))
           (testing "It should create a directory called `foo`"
             (cmd {:oatmeal-dir (str d)} (str "create " (name kind) " foo"))
             (testing "The project directory exists"

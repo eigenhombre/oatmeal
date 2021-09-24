@@ -1,11 +1,17 @@
 (ns oatmeal.build
-  (:require [me.raynes.fs :refer [chmod]]
+  (:require [clojure.java.io :as io]
             [clostache.parser :refer [render]]
-            [oatmeal.fs :as fs]))
+            [me.raynes.fs :refer [chmod]]
+            [oatmeal.fs :as fs])
+  (:import [java.nio.file FileAlreadyExistsException]))
 
 (defn make-lib [env projname]
   (let [tldir (fs/lisp-toplevel-dir env)
         target (str tldir "/" projname)]
+    (when (.exists (io/file target))
+      (throw (FileAlreadyExistsException.
+              (format "Directory '%s' already exists; not overwriting."
+                      target))))
     (fs/mkdirp target)
     (spit (str target "/Makefile") "")
     (spit (str target "/main.lisp") "(format t \"Hello World~%\")\n")
@@ -21,6 +27,10 @@
                             (spit (str target "/" outfile)
                                   (render (fs/resource-file outfile)
                                           {:progname projname})))]
+    (when (.exists (io/file target))
+      (throw (FileAlreadyExistsException.
+              (format "Directory '%s' already exists; not overwriting."
+                      target))))
     (fs/mkdirp target)
     (spit (str target "/Makefile")
           (render (fs/resource-file "Makefile.app")

@@ -29,9 +29,13 @@ the user's home directory will be used.
                      :else (println usage)))))
 
 (defn -main [& args]
-  (execute-cmd env/env args))
+  (try
+    (execute-cmd env/env args)
+    (catch Exception e
+      (println (.getMessage e))
+      (System/exit -1))))
 
 (comment
-  (-main "create" "lib" "fooboo")
-  (-main "create" "app" "fooapp")
-  (-main "update" "readme"))
+  (execute-cmd env/env ["create" "lib" "fooboo"])
+  (execute-cmd env/env ["create" "app" "fooapp"])
+  (execute-cmd env/env ["update" "readme"]))
