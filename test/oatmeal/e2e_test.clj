@@ -8,27 +8,29 @@
             [oatmeal.fs :as fs])
   (:import [java.nio.file FileAlreadyExistsException]))
 
-(defn cmd [env s]
+(defn- oatmeal-cmd [env s]
   (with-out-str
     (execute-cmd env (string/split s #"\s+"))))
+
+(defn- exists-in-dir [dir path-in-dir]
+  (->> (str dir path-in-dir)
+       io/file
+       .exists))
 
 (deftest e2etests-common
   (doseq [kind [:lib :app]]
     (testing (str "Making a new " (name kind) " project")
       (fs/with-tmp-dir d
-        (let [exists (fn [suffix]
-                       (->> suffix
-                            (str d)
-                            io/file
-                            .exists))]
+        (let [exists (partial exists-in-dir d)]
           (testing "The directory already exists"
             (mkdirp (str d "/baz"))
             (testing "... exception is thrown"
               (is (thrown? FileAlreadyExistsException
-                           (cmd {:oatmeal-dir (str d)}
-                                (str "create " (name kind) " baz"))))))
+                           (oatmeal-cmd {:oatmeal-dir (str d)}
+                                        (str "create " (name kind) " baz"))))))
           (testing "It should create a directory called `foo`"
-            (cmd {:oatmeal-dir (str d)} (str "create " (name kind) " foo"))
+            (oatmeal-cmd {:oatmeal-dir (str d)}
+                         (str "create " (name kind) " foo"))
             (testing "The project directory exists"
               (is (exists "/foo")))
             (testing "There is a Makefile"
@@ -37,6 +39,8 @@
               (is (exists "/foo/main.lisp")))
             (testing "There is a package.lisp"
               (is (exists "/foo/package.lisp")))
+            (testing "There is an ASDF file"
+              (is (exists "/foo/foo.asd")))
             (when (= kind :app)
               (testing "There is a build.sh"
                 (is (exists "/foo/build.sh")))
@@ -56,6 +60,7 @@
                     (is (zero? exit))
                     (is (seq out))
                     (is (empty? err)))))
+              ;; You are here: Add Quicklisp-related tests
               (testing "`make clean`"
                 (let [{:keys [exit err]}
                       (shell/sh "make" "clean"
@@ -65,5 +70,5 @@
                     (is (empty? err))
                     (is (not (exists "/foo/foo")))))))))
         (testing "Just creating the project files, but in a deeply nested path"
-          (cmd {:oatmeal-dir (str d "/a/nested/sub/directory")}
-               (str "create " (name kind) " foo")))))))
+          (oatmeal-cmd {:oatmeal-dir (str d "/a/nested/sub/directory")}
+                       (str "create " (name kind) " foo")))))))

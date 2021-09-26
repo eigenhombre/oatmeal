@@ -5,10 +5,24 @@ RUN apt-get -qq -y upgrade
 
 RUN apt-get install -qq -y leiningen sbcl make
 
-WORKDIR /oatmeal
+WORKDIR /home/janice
 
-COPY project.clj /oatmeal/project.clj
-RUN lein do clean, deps
+# Pull down Quicklisp and install it
+RUN curl -s -o quicklisp.lisp http://beta.quicklisp.org/quicklisp.lisp
+RUN sbcl --no-sysinit --no-userinit --load quicklisp.lisp \
+         --eval '(quicklisp-quickstart:install :path "/home/janice/quicklisp")' \
+         --quit
 
-COPY . /oatmeal
+# Set up .sbcl to load it:
+RUN echo | sbcl --load /home/janice/quicklisp/setup.lisp --eval '(ql:add-to-init-file)' --quit
+
+# Smoke test of Quicklisp:
+RUN sbcl --non-interactive \
+         --disable-debugger \
+         --eval '(ql:quickload :cl-aa)'
+
+# Set up Oatmeal:
+WORKDIR /home/janice/oatmeal
+
+COPY . /home/janice/oatmeal
 RUN make test

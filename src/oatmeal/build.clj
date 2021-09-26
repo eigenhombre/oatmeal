@@ -14,10 +14,9 @@
                       target))))
     (fs/mkdirp target)
     (spit (str target "/Makefile") "")
+    (spit (str target "/" projname ".asd") "")
     (spit (str target "/main.lisp") "(format t \"Hello World~%\")\n")
-    (spit (str target "/package.lisp")
-          (render (fs/resource-file "package.lisp")
-                  {:progname projname}))
+    (spit (str target "/package.lisp") "")
     (println "LIB" projname "in directory" tldir)))
 
 (defn make-app [env projname]
@@ -25,7 +24,8 @@
         target (str tldir "/" projname)
         render-w-projname (fn [outfile]
                             (spit (str target "/" outfile)
-                                  (render (fs/resource-file outfile)
+                                  (render (fs/resource-file (str "app/"
+                                                                 outfile))
                                           {:progname projname})))]
     (when (.exists (io/file target))
       (throw (FileAlreadyExistsException.
@@ -33,11 +33,15 @@
                       target))))
     (fs/mkdirp target)
     (spit (str target "/Makefile")
-          (render (fs/resource-file "Makefile.app")
+          (render (fs/resource-file "app/Makefile")
                   {:progname projname}))
+    (spit (str target "/" projname ".asd") "")
     (doseq [f ["main.lisp"
                "build.sh"
                "package.lisp"]]
       (render-w-projname f))
+    (spit (str target "/" projname ".asd")
+          (render (fs/resource-file "app/app.asd")
+                  {:progname projname}))
     (chmod "+x" (str target "/build.sh"))
     (println "APP" projname "in directory" tldir)))
