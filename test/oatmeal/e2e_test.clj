@@ -60,7 +60,6 @@
                     (is (zero? exit))
                     (is (seq out))
                     (is (empty? err)))))
-              ;; You are here: Add Quicklisp-related tests
               (testing "`make install`"
                 (fs/with-tmp-dir bindir
                   (let [{:keys [exit err]}

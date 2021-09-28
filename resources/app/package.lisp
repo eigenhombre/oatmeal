@@ -1,3 +1,3 @@
-(defpackage #:{{progname}}
-  (:use #:cl)
+(defpackage {{progname}}
+  (:use :cl :arrows)
   (:export :main))
