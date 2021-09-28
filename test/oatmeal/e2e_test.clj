@@ -3,6 +3,7 @@
             [clojure.java.shell :as shell]
             [clojure.string :as string]
             [clojure.test :refer [deftest testing is]]
+            [me.raynes.fs :as rfs]
             [oatmeal.core :refer [execute-cmd]]
             [oatmeal.fs :refer [mkdirp]]
             [oatmeal.fs :as fs])
@@ -61,6 +62,28 @@
                     (is (seq out))
                     (is (empty? err)))))
               ;; You are here: Add Quicklisp-related tests
+              (testing "`make install`"
+                (testing "with target dir defined"
+                  (fs/with-tmp-dir bindir
+                    (let [{:keys [exit err]}
+                          (shell/sh "make" "install"
+                                    :dir (str d "/foo")
+                                    :env {"BINDIR" (str bindir)})]
+                      (testing "Execution succeeded"
+                        (is (zero? exit))
+                        (is (empty? err)))
+                      (let [foofile (io/file (str bindir "/foo"))]
+                        (testing "Target executable exists"
+                          (is (.exists foofile))
+                          (testing "and is executable"
+                            (is (rfs/executable? foofile))))))))
+                (testing "with target dir not defined"
+                  (let [{:keys [exit err]}
+                        (shell/sh "make" "install"
+                                  :dir (str d "/foo"))]
+                    (testing "Execution failed as desired"
+                      (is (not (zero? exit)))
+                      (is (seq err))))))
               (testing "`make clean`"
                 (let [{:keys [exit err]}
                       (shell/sh "make" "clean"

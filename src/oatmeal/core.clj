@@ -14,6 +14,9 @@ Usage: oatmeal create lib <libname>
 Sources will be created in directory specified by the environment
 variable OATMEAL_DIR; if not present, a directory \"common-lisp\" in
 the user's home directory will be used.
+
+For \"make install\" to work correctly, set an environment BINDIR for
+executable files to be placed in.
 ")
 
 (defn execute-cmd [env args]
