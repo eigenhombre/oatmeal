@@ -1,6 +1,6 @@
 .PHONY: clean install
 
-{{progname}}: main.lisp
+{{progname}}: src/*.lisp
 	./build.sh
 
 clean:

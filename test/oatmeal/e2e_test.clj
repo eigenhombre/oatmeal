@@ -10,8 +10,7 @@
   (:import [java.nio.file FileAlreadyExistsException]))
 
 (defn- oatmeal-cmd [env s]
-  (with-out-str
-    (execute-cmd env (string/split s #"\s+"))))
+  (execute-cmd env (string/split s #"\s+")))
 
 (defn- exists-in-dir [dir path-in-dir]
   (->> (str dir path-in-dir)
@@ -37,9 +36,9 @@
             (testing "There is a Makefile"
               (is (exists "/foo/Makefile")))
             (testing "There is a main.lisp"
-              (is (exists "/foo/main.lisp")))
+              (is (exists "/foo/src/main.lisp")))
             (testing "There is a package.lisp"
-              (is (exists "/foo/package.lisp")))
+              (is (exists "/foo/src/package.lisp")))
             (testing "There is an ASDF file"
               (is (exists "/foo/foo.asd")))
             (when (= kind :app)
@@ -63,27 +62,19 @@
                     (is (empty? err)))))
               ;; You are here: Add Quicklisp-related tests
               (testing "`make install`"
-                (testing "with target dir defined"
-                  (fs/with-tmp-dir bindir
-                    (let [{:keys [exit err]}
-                          (shell/sh "make" "install"
-                                    :dir (str d "/foo")
-                                    :env {"BINDIR" (str bindir)})]
-                      (testing "Execution succeeded"
-                        (is (zero? exit))
-                        (is (empty? err)))
-                      (let [foofile (io/file (str bindir "/foo"))]
-                        (testing "Target executable exists"
-                          (is (.exists foofile))
-                          (testing "and is executable"
-                            (is (rfs/executable? foofile))))))))
-                (testing "with target dir not defined"
+                (fs/with-tmp-dir bindir
                   (let [{:keys [exit err]}
                         (shell/sh "make" "install"
-                                  :dir (str d "/foo"))]
-                    (testing "Execution failed as desired"
-                      (is (not (zero? exit)))
-                      (is (seq err))))))
+                                  :dir (str d "/foo")
+                                  :env {"BINDIR" (str bindir)})]
+                    (testing "Execution succeeded"
+                      (is (zero? exit))
+                      (is (empty? err)))
+                    (let [foofile (io/file (str bindir "/foo"))]
+                      (testing "Target executable exists"
+                        (is (.exists foofile))
+                        (testing "and is executable"
+                          (is (rfs/executable? foofile))))))))
               (testing "`make clean`"
                 (let [{:keys [exit err]}
                       (shell/sh "make" "clean"
