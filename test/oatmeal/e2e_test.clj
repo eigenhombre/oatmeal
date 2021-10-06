@@ -17,6 +17,18 @@
        io/file
        .exists))
 
+(defn sbcl-with-ql-context [dirname & args]
+  (apply shell/sh
+         (concat ["sbcl"
+                  "--non-interactive"
+                  "--disable-debugger"
+                  "--eval"
+                  "(pushnew (truename \".\") ql:*local-project-directories*)"
+                  "--eval"
+                  "(ql:register-local-projects)"]
+                 args
+                 [:dir dirname])))
+
 (deftest e2etests-common
   (doseq [kind [:lib :app]]
     (testing (str "Making a new " (name kind) " project")
@@ -44,17 +56,19 @@
             (when (= kind :lib)
               (testing "Project is loadable through Quicklisp"
                 (let [{:keys [exit out err]}
-                      (shell/sh "sbcl"
-                                "--non-interactive"
-                                "--disable-debugger"
-                                "--eval"
-                                "(pushnew (truename \".\") ql:*local-project-directories*)"
-                                "--eval"
-                                "(ql:register-local-projects)"
-                                "--eval"
-                                "(ql:quickload :foo)"
-                                :dir (str d "/foo"))]
+                      (sbcl-with-ql-context (str d "/foo")
+                                            "--eval"
+                                            "(ql:quickload :foo)")]
                   (testing "quickload succeeded"
+                    (is (zero? exit))
+                    (is (seq out))
+                    (is (empty? err)))))
+              (testing "Project is testable through ASDF"
+                (let [{:keys [exit out err]}
+                      (sbcl-with-ql-context (str d "/foo")
+                                            "--eval"
+                                            "(asdf:test-system :foo)")]
+                  (testing "tests succeeded"
                     (is (zero? exit))
                     (is (seq out))
                     (is (empty? err))))))

@@ -20,10 +20,13 @@
                       target))))
     (fs/mkdirp target)
     (fs/mkdirp (str target "/src"))
+    (fs/mkdirp (str target "/test"))
     (spit (str target "/Makefile") "")
     (render-file (str projname ".asd") "lib/lib.asd")
-    (render-file "src/main.lisp" "lib/main.lisp")
-    (render-file "src/package.lisp" "lib/package.lisp")
+    (render-file "src/main.lisp" "lib/src/main.lisp")
+    (render-file "src/package.lisp" "lib/src/package.lisp")
+    (render-file "test/main.lisp" "lib/test/main.lisp")
+    (render-file "test/package.lisp" "lib/test/package.lisp")
     (println "LIB" projname "in directory" tldir)))
 
 (defn make-app [env projname]
