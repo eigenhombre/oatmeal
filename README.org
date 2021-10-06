@@ -1,5 +1,3 @@
-#+TITLE: oatmeal
-
 #+OPTIONS: toc:nil num:nil
 
 #+BEGIN_QUOTE
