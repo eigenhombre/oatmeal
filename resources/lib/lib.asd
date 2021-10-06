@@ -1,7 +1,7 @@
 (defsystem "{{projname}}"
-  :build-operation "program-op"
-  :build-pathname "{{projname}}"
-  :entry-point "{{projname}}:main"
+  :version "0.0.1"
+  :author "TBD"
+  :license "TBD"
   :depends-on (:arrows)
   :components ((:module "src"
                 :components ((:file "package")

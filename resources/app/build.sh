@@ -8,5 +8,5 @@ sbcl --non-interactive \
      --disable-debugger \
      --eval '(pushnew (truename ".") ql:*local-project-directories*)' \
      --eval '(ql:register-local-projects)' \
-     --eval '(ql:quickload :{{progname}})' \
-     --eval '(progn (sb-ext:disable-debugger) (sb-ext:save-lisp-and-die "{{progname}}" :toplevel #'"'"'{{progname}}:main :executable t))'
+     --eval '(ql:quickload :{{projname}})' \
+     --eval '(progn (sb-ext:disable-debugger) (sb-ext:save-lisp-and-die "{{projname}}" :toplevel #'"'"'{{projname}}:main :executable t))'

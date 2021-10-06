@@ -1,11 +1,11 @@
 .PHONY: clean install
 
-{{progname}}: src/*.lisp
+{{projname}}: src/*.lisp
 	./build.sh
 
 clean:
-	rm -rf {{progname}}
+	rm -rf {{projname}}
 
-install: {{progname}}
+install: {{projname}}
 	test -n "$(BINDIR)"  # $$BINDIR
-	cp {{progname}} ${BINDIR}
+	cp {{projname}} ${BINDIR}

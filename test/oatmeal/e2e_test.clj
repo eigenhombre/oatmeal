@@ -41,6 +41,23 @@
               (is (exists "/foo/src/package.lisp")))
             (testing "There is an ASDF file"
               (is (exists "/foo/foo.asd")))
+            (when (= kind :lib)
+              (testing "Project is loadable through Quicklisp"
+                (let [{:keys [exit out err]}
+                      (shell/sh "sbcl"
+                                "--non-interactive"
+                                "--disable-debugger"
+                                "--eval"
+                                "(pushnew (truename \".\") ql:*local-project-directories*)"
+                                "--eval"
+                                "(ql:register-local-projects)"
+                                "--eval"
+                                "(ql:quickload :foo)"
+                                :dir (str d "/foo"))]
+                  (testing "quickload succeeded"
+                    (is (zero? exit))
+                    (is (seq out))
+                    (is (empty? err))))))
             (when (= kind :app)
               (testing "There is a build.sh"
                 (is (exists "/foo/build.sh")))

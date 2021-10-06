@@ -1,4 +1,4 @@
-(in-package #:{{progname}})
+(in-package #:{{projname}})
 
 (defun main ()
-  (format t "Thanks for using {{progname}}!~%"))
+  (format t "Thanks for using {{projname}}!~%"))

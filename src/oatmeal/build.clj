@@ -5,9 +5,15 @@
             [oatmeal.fs :as fs])
   (:import [java.nio.file FileAlreadyExistsException]))
 
+(defn render-and-write [projname target-dir target-file src-file]
+  (spit (str target-dir "/" target-file)
+        (render (fs/resource-file src-file)
+                {:projname projname})))
+
 (defn make-lib [env projname]
   (let [tldir (fs/lisp-toplevel-dir env)
-        target (str tldir "/" projname)]
+        target (str tldir "/" projname)
+        render-file (partial render-and-write projname target)]
     (when (.exists (io/file target))
       (throw (FileAlreadyExistsException.
               (format "Directory '%s' already exists; not overwriting."
@@ -15,15 +21,10 @@
     (fs/mkdirp target)
     (fs/mkdirp (str target "/src"))
     (spit (str target "/Makefile") "")
-    (spit (str target "/" projname ".asd") "")
-    (spit (str target "/src/main.lisp") "(format t \"Hello World~%\")\n")
-    (spit (str target "/src/package.lisp") "")
+    (render-file (str projname ".asd") "lib/lib.asd")
+    (render-file "src/main.lisp" "lib/main.lisp")
+    (render-file "src/package.lisp" "lib/package.lisp")
     (println "LIB" projname "in directory" tldir)))
-
-(defn render-and-write [projname target-dir target-file src-file]
-  (spit (str target-dir "/" target-file)
-        (render (fs/resource-file src-file)
-                {:progname projname})))
 
 (defn make-app [env projname]
   (let [tldir (fs/lisp-toplevel-dir env)
