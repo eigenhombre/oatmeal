@@ -12,7 +12,7 @@
 A small tool for generating Common Lisp projects.
 
 I'm aware of =quickproject=, but I want to set things up a little
-differently and add some functionality around adding and removing
+differently and possibly eventually add some functionality around adding and removing
 dependencies.
 
 ** Prerequisites
