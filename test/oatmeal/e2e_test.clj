@@ -82,6 +82,9 @@
                           clojure.java.io/file
                           .canExecute))))
               (testing "`make test`"
+                (testing "test lisp files exist"
+                  (is (exists "/foo/test/main.lisp"))
+                  (is (exists "/foo/test/package.lisp")))
                 (let [{:keys [exit out err]}
                       (shell/sh "make" "test" :dir (str d "/foo"))]
                   (testing "Make succeeded"
