@@ -22,4 +22,5 @@ docker:
 	docker build -t "oatmeal" .
 
 test:
-	lein do kaocha, bikeshed, kibit, eastwood
+	lein test
+#	lein do kaocha, bikeshed, kibit, eastwood
