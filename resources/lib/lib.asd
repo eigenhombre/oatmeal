@@ -5,7 +5,12 @@
   :license "FIXME"
   :serial t
   :in-order-to ((asdf:test-op (asdf:test-op :{{projname}}/test)))
-  :depends-on (:arrows :1am)
+  :depends-on (:arrows
+               ;; FIXME: Though not an explicit run-time dependency,
+               ;; for some reason I needed to add this for GitHub
+               ;; Action CI build to succeed.  This merits more
+               ;; investigation:
+               :1am)
   :components ((:module "src"
                 :serial t
                 :components ((:file "package")

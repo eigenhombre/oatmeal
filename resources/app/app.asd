@@ -14,14 +14,11 @@
   :description "FIXME"
   :author "FIXME"
   :license "FIXME"
-
   :depends-on (:{{projname}} :1am)
-
   :serial t
   :components ((:module "test"
                 :serial t
                 :components ((:file "package")
                              (:file "test"))))
-
   :perform (asdf:test-op (op system)
                          (funcall (read-from-string "{{projname}}.test:run-tests"))))
