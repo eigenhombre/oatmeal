@@ -38,8 +38,8 @@
             (mkdirp (str d "/baz"))
             (testing "... exception is thrown"
               (is (thrown? FileAlreadyExistsException
-                           (oatmeal-cmd {:oatmeal-dir (str d)}
-                                        (str "create " (name kind) " baz"))))))
+                    (oatmeal-cmd {:oatmeal-dir (str d)}
+                                 (str "create " (name kind) " baz"))))))
           (testing "It should create a directory called `foo`"
             (oatmeal-cmd {:oatmeal-dir (str d)}
                          (str "create " (name kind) " foo"))
@@ -53,22 +53,35 @@
               (is (exists "/foo/src/package.lisp")))
             (testing "There is an ASDF file"
               (is (exists "/foo/foo.asd")))
-            (when (= kind :lib)
-              (testing "Project is loadable through Quicklisp"
+            (testing "Project is loadable through Quicklisp"
+              (let [{:keys [exit out err]}
+                    (sbcl-with-ql-context (str d "/foo")
+                                          "--eval"
+                                          "(ql:quickload :foo)")]
+                (testing "quickload succeeded"
+                  (is (zero? exit))
+                  (is (seq out))
+                  (is (empty? err)))))
+            (testing "Project is testable through ASDF"
+              (let [{:keys [exit out err]}
+                    (sbcl-with-ql-context (str d "/foo")
+                                          "--eval"
+                                          "(asdf:test-system :foo)")]
+                (testing "tests succeeded"
+                  (is (zero? exit))
+                  (is (seq out))
+                  (is (empty? err)))))
+            (testing "Makefile"
+              (testing "It exists"
+                (is (exists "/foo/Makefile")))
+              (testing "test script exists"
+                (is (exists "/foo/test.sh"))
+                (testing "It has the execute bit set"
+                  (is (.canExecute (clojure.java.io/file (str d "/foo/test.sh"))))))
+              (testing "`make test`"
                 (let [{:keys [exit out err]}
-                      (sbcl-with-ql-context (str d "/foo")
-                                            "--eval"
-                                            "(ql:quickload :foo)")]
-                  (testing "quickload succeeded"
-                    (is (zero? exit))
-                    (is (seq out))
-                    (is (empty? err)))))
-              (testing "Project is testable through ASDF"
-                (let [{:keys [exit out err]}
-                      (sbcl-with-ql-context (str d "/foo")
-                                            "--eval"
-                                            "(asdf:test-system :foo)")]
-                  (testing "tests succeeded"
+                      (shell/sh "make" "test" :dir (str d "/foo"))]
+                  (testing "Make succeeded"
                     (is (zero? exit))
                     (is (seq out))
                     (is (empty? err))))))

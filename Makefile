@@ -1,6 +1,4 @@
-.PHONY: all
-.PHONY: docker
-.PHONY: test
+.PHONY: all docker test
 
 BINPATH = ${HOME}/bin
 JARPATH = target/uberjar/oatmeal.jar

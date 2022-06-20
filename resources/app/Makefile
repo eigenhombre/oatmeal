@@ -3,6 +3,9 @@
 {{projname}}: src/*.lisp
 	./build.sh
 
+test:
+	echo OK
+
 clean:
 	rm -rf {{projname}}
 
