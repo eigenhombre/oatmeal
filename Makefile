@@ -22,5 +22,6 @@ docker:
 	docker build -t "oatmeal" .
 
 test:
-	lein test
-#	lein do kaocha, bikeshed, kibit, eastwood
+#       Switch to `lein test` if test fails in CI and you need more info:
+#	lein test
+	lein do kaocha, bikeshed, kibit, eastwood
