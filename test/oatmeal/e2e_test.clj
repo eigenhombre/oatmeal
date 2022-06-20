@@ -77,7 +77,10 @@
               (testing "test script exists"
                 (is (exists "/foo/test.sh"))
                 (testing "It has the execute bit set"
-                  (is (.canExecute (clojure.java.io/file (str d "/foo/test.sh"))))))
+                  (is (-> d
+                          (str "/foo/test.sh")
+                          clojure.java.io/file
+                          .canExecute))))
               (testing "`make test`"
                 (let [{:keys [exit out err]}
                       (shell/sh "make" "test" :dir (str d "/foo"))]
