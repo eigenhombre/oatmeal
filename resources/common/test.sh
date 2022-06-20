@@ -8,6 +8,5 @@ sbcl --non-interactive \
      --disable-debugger \
      --eval '(pushnew (truename ".") ql:*local-project-directories*)' \
      --eval '(ql:register-local-projects)' \
-     --eval '(ql:quickload :1am)'          \
      --eval '(ql:quickload :{{projname}})' \
      --eval '(asdf:test-system :{{projname}}/test)'

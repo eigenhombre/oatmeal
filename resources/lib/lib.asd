@@ -5,7 +5,7 @@
   :license "FIXME"
   :serial t
   :in-order-to ((asdf:test-op (asdf:test-op :{{projname}}/test)))
-  :depends-on (:arrows)
+  :depends-on (:arrows :1am)
   :components ((:module "src"
                 :serial t
                 :components ((:file "package")
