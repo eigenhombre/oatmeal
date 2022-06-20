@@ -27,7 +27,7 @@
     (render-file (str projname ".asd") "lib/lib.asd")
     (render-file "src/main.lisp" "lib/src/main.lisp")
     (render-file "src/package.lisp" "lib/src/package.lisp")
-    (render-file "test/main.lisp" "common/test/main.lisp")
+    (render-file "test/test.lisp" "common/test/test.lisp")
     (render-file "test/package.lisp" "common/test/package.lisp")
     (println "LIB" projname "in directory" tldir)))
 
@@ -49,7 +49,7 @@
     (chmod "+x" (str target "/build.sh"))
     (render-file "src/main.lisp" "app/main.lisp")
     (render-file "src/package.lisp" "app/package.lisp")
-    (render-file "test/main.lisp" "common/test/main.lisp")
+    (render-file "test/test.lisp" "common/test/test.lisp")
     (render-file "test/package.lisp" "common/test/package.lisp")
     (render-file (str projname ".asd") "app/app.asd")
     (println "APP" projname "in directory" tldir)))

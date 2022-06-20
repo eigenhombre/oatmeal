@@ -62,18 +62,19 @@
                   (is (zero? exit))
                   (is (seq out))
                   (is (empty? err)))))
-            (testing "Project is testable through ASDF"
-              (let [{:keys [exit out err]}
-                    (sbcl-with-ql-context (str d "/foo")
-                                          "--eval"
-                                          "(asdf:test-system :foo)")]
-                (testing "tests succeeded"
-                  (is (zero? exit))
-                  (is (seq out))
-                  (is (empty? err)))))
             (testing "Makefile"
               (testing "It exists"
-                (is (exists "/foo/Makefile")))
+                (is (exists "/foo/Makefile"))))
+            (testing "Unit testing"
+              (testing "Project is testable through ASDF"
+                (let [{:keys [exit out err]}
+                      (sbcl-with-ql-context (str d "/foo")
+                                            "--eval"
+                                            "(asdf:test-system :foo)")]
+                  (testing "tests succeeded"
+                    (is (zero? exit))
+                    (is (seq out))
+                    (is (empty? err)))))
               (testing "test script exists"
                 (is (exists "/foo/test.sh"))
                 (testing "It has the execute bit set"
@@ -83,7 +84,7 @@
                           .canExecute))))
               (testing "`make test`"
                 (testing "test lisp files exist"
-                  (is (exists "/foo/test/main.lisp"))
+                  (is (exists "/foo/test/test.lisp"))
                   (is (exists "/foo/test/package.lisp")))
                 (let [{:keys [exit out err]}
                       (shell/sh "make" "test" :dir (str d "/foo"))]

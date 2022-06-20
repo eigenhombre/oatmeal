@@ -1,4 +1,4 @@
-(in-package #:{{projname}}-tests)
+(in-package #:{{projname}}.test)
 
 (defun run-tests () (1am:run))
 

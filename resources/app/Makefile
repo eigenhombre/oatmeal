@@ -1,10 +1,10 @@
-.PHONY: clean install
+.PHONY: clean install test
 
 {{projname}}: src/*.lisp
 	./build.sh
 
 test:
-	echo OK
+	./test.sh
 
 clean:
 	rm -rf {{projname}}
