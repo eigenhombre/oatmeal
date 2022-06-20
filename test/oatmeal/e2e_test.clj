@@ -72,9 +72,12 @@
                                             "--eval"
                                             "(asdf:test-system :foo)")]
                   (testing "tests succeeded"
-                    (is (zero? exit))
-                    (is (seq out))
-                    (is (empty? err)))))
+                    (is (zero? exit)
+                        (format "Nonzero exit: %d" exit))
+                    (is (seq out)
+                        "`out` is empty")
+                    (is (empty? err)
+                        (format "Nonempty stderr:\n%s\n" err)))))
               (testing "test script exists"
                 (is (exists "/foo/test.sh"))
                 (testing "It has the execute bit set"
