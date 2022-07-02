@@ -7,7 +7,10 @@
 
 * oatmeal
 
-[[./clippings.jpeg]]
+
+![build](https://github.com/eigenhombre/oatmeal/actions/workflows/build.yml/badge.svg)
+
+<img src="/clippings.jpeg" width="400">
 
 A small tool for generating Common Lisp projects.
 
