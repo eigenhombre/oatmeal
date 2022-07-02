@@ -4,9 +4,22 @@
 # https://github.com/cicakhq/potato/blob/master/tools/build_binary.sh;
 # Quicklisp path hack from
 # https://www.darkchestnut.com/2016/quicklisp-load-personal-projects-from-arbitrary-locations/
+if [ ! -e ~/ql/ql.lisp ]; then
+  mkdir -p ~/ql
+  curl -o ~/ql/ql.lisp http://beta.quicklisp.org/quicklisp.lisp
+
+  if [ ! -e ~/.quicklisp ]; then
+    sbcl --no-sysinit --no-userinit --load ~/ql/ql.lisp \
+           --eval '(quicklisp-quickstart:install :path "~/.quicklisp")' \
+           --eval '(ql:add-to-init-file)' \
+           --quit
+  fi
+fi
+
 sbcl --non-interactive \
      --disable-debugger \
      --eval '(pushnew (truename ".") ql:*local-project-directories*)' \
      --eval '(ql:register-local-projects)' \
+     --eval '(ql:quickload :1AM)' \
      --eval '(ql:quickload :{{projname}})' \
      --eval '(asdf:test-system :{{projname}}/test)'

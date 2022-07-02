@@ -11,4 +11,5 @@ README.pdf
 pom.xml
 pom.xml.asc
 profiles.clj
+.idea
 oatmeal.iml
