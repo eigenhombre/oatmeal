@@ -1,6 +1,6 @@
 # oatmeal
 
-<img src="/clippings.jpeg" width="400">
+<img src="/oats.jpg" width="400">
 
 > "Lisp has all the visual appeal of oatmeal with fingernail clippings mixed in."
 > -- Larry Wall
