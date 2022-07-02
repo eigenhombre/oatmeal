@@ -13,7 +13,7 @@
 (defn- show-dir [projtype projname]
   (println (format "%s %s" projtype projname)))
 
-(defmacro make-common [projname & body]
+(defmacro make-project [projname & body]
   `(let [tldir# (fs/lisp-toplevel-dir)
          target# (str tldir# "/" ~projname)
          render-file# (partial render-and-write ~projname target#)
@@ -36,7 +36,7 @@
 (declare target)
 
 (defn make-lib [projname]
-  (make-common projname
+  (make-project projname
     (render-file "Makefile" "lib/Makefile")
     (render-file (str projname ".asd") "lib/lib.asd")
     (render-file "src/main.lisp" "lib/src/main.lisp")
@@ -44,7 +44,7 @@
     (show-dir "LIB" target)))
 
 (defn make-app [projname]
-  (make-common projname
+  (make-project projname
     (render-file "Makefile" "app/Makefile")
     (render-file (str projname ".asd") "app/app.asd")
     (render-file "src/main.lisp" "app/main.lisp")
