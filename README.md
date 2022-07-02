@@ -1,16 +1,11 @@
-#+OPTIONS: toc:nil num:nil
-
-#+BEGIN_QUOTE
-"Lisp has all the visual appeal of oatmeal with fingernail clippings mixed in."
--- Larry Wall
-#+END_QUOTE
-
-* oatmeal
-
-
-![build](https://github.com/eigenhombre/oatmeal/actions/workflows/build.yml/badge.svg)
+# oatmeal
 
 <img src="/clippings.jpeg" width="400">
+
+> "Lisp has all the visual appeal of oatmeal with fingernail clippings mixed in."
+> -- Larry Wall
+
+![build](https://github.com/eigenhombre/oatmeal/actions/workflows/build.yml/badge.svg)
 
 A small tool for generating Common Lisp projects.
 
