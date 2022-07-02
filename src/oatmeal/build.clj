@@ -10,8 +10,11 @@
         (render (fs/resource-file src-file)
                 {:projname projname})))
 
-(defn make-lib [env projname]
-  (let [tldir (fs/lisp-toplevel-dir env)
+(defn- show-dir [projtype projname]
+  (println (format "%s %s" projtype projname)))
+
+(defn make-lib [projname]
+  (let [tldir (fs/lisp-toplevel-dir)
         target (str tldir "/" projname)
         render-file (partial render-and-write projname target)]
     (when (.exists (io/file target))
@@ -29,10 +32,10 @@
     (render-file "src/package.lisp" "lib/src/package.lisp")
     (render-file "test/test.lisp" "common/test/test.lisp")
     (render-file "test/package.lisp" "common/test/package.lisp")
-    (println "LIB" projname "in directory" tldir)))
+    (show-dir "LIB" target)))
 
-(defn make-app [env projname]
-  (let [tldir (fs/lisp-toplevel-dir env)
+(defn make-app [projname]
+  (let [tldir (fs/lisp-toplevel-dir)
         target (str tldir "/" projname)
         render-file (partial render-and-write projname target)]
     (when (.exists (io/file target))
@@ -52,4 +55,4 @@
     (render-file "test/test.lisp" "common/test/test.lisp")
     (render-file "test/package.lisp" "common/test/package.lisp")
     (render-file (str projname ".asd") "app/app.asd")
-    (println "APP" projname "in directory" tldir)))
+    (show-dir "APP" target)))

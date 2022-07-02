@@ -1,6 +1,5 @@
 (ns oatmeal.core
   (:require [docopt.core :as docopt]
-            [environ.core :as env]
             [oatmeal.build :as b]
             [oatmeal.readme :as r])
   (:gen-class))
@@ -11,15 +10,15 @@ Usage: oatmeal create lib <libname>
        oatmeal create app <appname>
        oatmeal update readme
 
-Sources will be created in directory specified by the environment
-variable OATMEAL_DIR; if not present, a directory \"common-lisp\" in
-the user's home directory will be used.
+Sources will be created in a subdirectory of the current working
+directory. If the directory `./<libname|appname>` already
+exists, we will not overwrite its contents.
 
 For \"make install\" to work correctly, set an environment BINDIR for
 executable files to be placed in.
 ")
 
-(defn execute-cmd [env args]
+(defn execute-cmd [args]
   (docopt/docopt usage
                  args
                  (fn [{:strs [update readme
@@ -27,18 +26,18 @@ executable files to be placed in.
                               <appname>]}]
                    (cond
                      (and update readme) (r/update-readme! usage)
-                     <libname> (b/make-lib env <libname>)
-                     <appname> (b/make-app env <appname>)
+                     <libname> (b/make-lib <libname>)
+                     <appname> (b/make-app <appname>)
                      :else (println usage)))))
 
 (defn -main [& args]
   (try
-    (execute-cmd env/env args)
+    (execute-cmd args)
     (catch Exception e
       (println (.getMessage e))
       (System/exit -1))))
 
 (comment
-  (execute-cmd env/env ["create" "lib" "fooboo"])
-  (execute-cmd env/env ["create" "app" "fooapp"])
-  (execute-cmd env/env ["update" "readme"]))
+  (execute-cmd ["create" "lib" "fooboo"])
+  (execute-cmd ["create" "app" "fooapp"])
+  (execute-cmd ["update" "readme"]))

@@ -43,9 +43,9 @@ Usage: oatmeal create lib <libname>
        oatmeal create app <appname>
        oatmeal update readme
 
-Sources will be created in directory specified by the environment
-variable OATMEAL_DIR; if not present, a directory "common-lisp" in
-the user's home directory will be used.
+Sources will be created in a subdirectory of the current working
+directory. If the directory `./<libname|appname>` already
+exists, we will not overwrite its contents.
 
 For "make install" to work correctly, set an environment BINDIR for
 executable files to be placed in.

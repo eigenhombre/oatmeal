@@ -10,8 +10,8 @@
          ;; FIXME: Eliminate double-evaluation:
          (fs/delete-dir ~dir-file)))))
 
-(defn lisp-toplevel-dir [{:keys [lisp-home] :as env}]
-  (or lisp-home (str (:home env) "/common-lisp")))
+(defn lisp-toplevel-dir []
+  (System/getProperty "user.dir"))
 
 (defn resource-file [path]
   (slurp (io/resource path)))
