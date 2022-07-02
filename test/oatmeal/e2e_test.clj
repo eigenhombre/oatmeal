@@ -38,10 +38,10 @@
             (mkdirp (str d "/baz"))
             (testing "... exception is thrown"
               (is (thrown? FileAlreadyExistsException
-                    (oatmeal-cmd {:oatmeal-dir (str d)}
+                    (oatmeal-cmd {:lisp-home (str d)}
                                  (str "create " (name kind) " baz"))))))
           (testing "It should create a directory called `foo`"
-            (oatmeal-cmd {:oatmeal-dir (str d)}
+            (oatmeal-cmd {:lisp-home (str d)}
                          (str "create " (name kind) " foo"))
             (testing "The project directory exists"
               (is (exists "/foo")))
@@ -137,5 +137,5 @@
                     (is (empty? err))
                     (is (not (exists "/foo/foo")))))))))
         (testing "Just creating the project files, but in a deeply nested path"
-          (oatmeal-cmd {:oatmeal-dir (str d "/a/nested/sub/directory")}
+          (oatmeal-cmd {:lisp-home (str d "/a/nested/sub/directory")}
                        (str "create " (name kind) " foo")))))))

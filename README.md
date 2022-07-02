@@ -36,9 +36,12 @@ And then just type `oatmeal` to invoke the command.
 
 ## Usage
 
-    Usage: oatmeal create lib <libname>
-           oatmeal create app <appname>
-           oatmeal update readme
+<!-- BEGIN OATMEAL USAGE -->
+```
+
+Usage: oatmeal create lib <libname>
+       oatmeal create app <appname>
+       oatmeal update readme
 
 Sources will be created in directory specified by the environment
 variable OATMEAL_DIR; if not present, a directory "common-lisp" in
@@ -47,7 +50,10 @@ the user's home directory will be used.
 For "make install" to work correctly, set an environment BINDIR for
 executable files to be placed in.
 
-To update this file (README.org), simply:
+```
+<!-- END OATMEAL USAGE -->
+
+To update this file (`README.md`), simply:
 
     make doc
 

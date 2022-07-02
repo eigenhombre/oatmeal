@@ -3,13 +3,13 @@
 
 (defn readme-txt [orig-txt usage]
   (string/replace orig-txt
-                  #"(?sm)\# BEGIN OATMEAL USAGE.+?END OATMEAL USAGE"
-                  (string/join "\n" ["# BEGIN OATMEAL USAGE"
-                                     "#+BEGIN_SRC"
+                  #"(?sm)\<!-- BEGIN OATMEAL USAGE -->.+?END OATMEAL USAGE -->"
+                  (string/join "\n" ["<!-- BEGIN OATMEAL USAGE -->"
+                                     "```"
                                      usage
-                                     "#+END_SRC"
-                                     "# END OATMEAL USAGE"])))
+                                     "```"
+                                     "<!-- END OATMEAL USAGE -->"])))
 
 (defn update-readme! [usage]
-  (let [orig-txt (slurp "README.org")]
-    (spit "README.org" (readme-txt orig-txt usage))))
+  (let [orig-txt (slurp "README.md")]
+    (spit "README.md" (readme-txt orig-txt usage))))
