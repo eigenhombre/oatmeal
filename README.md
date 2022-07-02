@@ -9,44 +9,36 @@
 
 A small tool for generating Common Lisp projects.
 
-I'm aware of =quickproject=, but I want to set things up a little
+I'm aware of `quickproject`, but I want to set things up a little
 differently and possibly eventually add some functionality around adding and removing
 dependencies.
 
-** Prerequisites
+## Prerequisites
 
 (On MacOS; your mileage may vary on other platforms.) First install
-Java and [[https://leiningen.org/][Leiningen]].  Then =brew install sbcl=.
+Java and [Leiningen](https://leiningen.org/).  Then `brew install sbcl`.
 
-** Building
+## Building
 
-#+BEGIN_SRC
-$ make
-$ make install
-#+END_SRC
+    $ make
+    $ make install
 
-** Running
+## Running
 
-#+BEGIN_SRC
-$ java -jar ~/bin/oatmeal.jar
-#+END_SRC
+    $ java -jar ~/bin/oatmeal.jar
 
 Or, add the following to your shell profile:
 
-#+BEGIN_SRC
-alias oatmeal="java -jar ~/bin/oatmeal.jar"
-#+END_SRC
+    alias oatmeal="java -jar ~/bin/oatmeal.jar"
 
-And then just type =oatmeal= to invoke the command.
+And then just type `oatmeal` to invoke the command.
 
-** Usage
 
-# BEGIN OATMEAL USAGE
-#+BEGIN_SRC
+## Usage
 
-Usage: oatmeal create lib <libname>
-       oatmeal create app <appname>
-       oatmeal update readme
+    Usage: oatmeal create lib <libname>
+           oatmeal create app <appname>
+           oatmeal update readme
 
 Sources will be created in directory specified by the environment
 variable OATMEAL_DIR; if not present, a directory "common-lisp" in
@@ -55,48 +47,39 @@ the user's home directory will be used.
 For "make install" to work correctly, set an environment BINDIR for
 executable files to be placed in.
 
-#+END_SRC
-# END OATMEAL USAGE
-
 To update this file (README.org), simply:
-#+BEGIN_SRC
-make doc
-#+END_SRC
 
-** Example
-#+BEGIN_SRC
-$  oatmeal create app cranky
-APP cranky in directory /Users/jacobsen/Programming/Lisp/common-lisp
-$  cd cranky
-$  ls
-Makefile	build.sh	main.lisp
-$  make
-./build.sh
-This is SBCL 2.1.8, an implementation of ANSI Common Lisp.
-More information about SBCL is available at <http://www.sbcl.org/>.
+    make doc
 
-SBCL is free software, provided as is, with absolutely no warranty.
-It is mostly in the public domain; some portions are provided under
-BSD-style licenses.  See the CREDITS and COPYING files in the
-distribution for more information.
-[undoing binding stack and other enclosing state... done]
-[performing final GC... done]
-[saving current Lisp image into cranky:
-writing 1728 bytes from the read-only space at 0x300000000
-writing 1840 bytes from the static space at 0x300200000
-writing 0 bytes from the immobile space at 0x300300000
-writing 41418752 bytes from the dynamic space at 0x7003000000
-done]
-$  ./cranky
-Hello World
-$
-#+END_SRC
+## Example
 
-** Future Work
+    $  oatmeal create app cranky
+    APP cranky in directory /Users/jacobsen/Programming/Lisp/common-lisp
+    $  cd cranky
+    $  ls
+    Makefile	build.sh	main.lisp
+    $  make
+    ./build.sh
+    This is SBCL 2.1.8, an implementation of ANSI Common Lisp.
+    More information about SBCL is available at <http://www.sbcl.org/>.
 
-See [[https://github.com/eigenhombre/oatmeal/issues][issues list]].
+    SBCL is free software, provided as is, with absolutely no warranty.
+    It is mostly in the public domain; some portions are provided under
+    BSD-style licenses.  See the CREDITS and COPYING files in the
+    distribution for more information.
+    [undoing binding stack and other enclosing state... done]
+    [performing final GC... done]
+    [saving current Lisp image into cranky:
+    writing 1728 bytes from the read-only space at 0x300000000
+    writing 1840 bytes from the static space at 0x300200000
+    writing 0 bytes from the immobile space at 0x300300000
+    writing 41418752 bytes from the dynamic space at 0x7003000000
+    done]
+    $  ./cranky
+    Hello World
+    $
 
-** License
+## License
 
 Copyright © 2021 John Jacobsen
 
