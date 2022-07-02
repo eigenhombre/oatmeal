@@ -7,7 +7,7 @@
 
 * oatmeal
 
-[[./maipian.png]]
+[[./clippings.jpeg]]
 
 A small tool for generating Common Lisp projects.
 
