@@ -13,46 +13,42 @@
 (defn- show-dir [projtype projname]
   (println (format "%s %s" projtype projname)))
 
+(defmacro make-common [projname & body]
+  `(let [tldir# (fs/lisp-toplevel-dir)
+         target# (str tldir# "/" ~projname)
+         render-file# (partial render-and-write ~projname target#)
+         ~'target target#
+         ~'render-file render-file#]
+     (when (.exists (io/file target#))
+       (throw (FileAlreadyExistsException.
+                (format "Directory '%s' already exists; not overwriting."
+                        target#))))
+     (fs/mkdirp target#)
+     (fs/mkdirp (str target# "/src"))
+     (fs/mkdirp (str target# "/test"))
+     (render-file# "test.sh" "common/test.sh")
+     (chmod "+x" (str target# "/test.sh"))
+     (render-file# "test/test.lisp" "common/test/test.lisp")
+     (render-file# "test/package.lisp" "common/test/package.lisp")
+     ~@body))
+
+(declare render-file)
+(declare target)
+
 (defn make-lib [projname]
-  (let [tldir (fs/lisp-toplevel-dir)
-        target (str tldir "/" projname)
-        render-file (partial render-and-write projname target)]
-    (when (.exists (io/file target))
-      (throw (FileAlreadyExistsException.
-              (format "Directory '%s' already exists; not overwriting."
-                      target))))
-    (fs/mkdirp target)
-    (fs/mkdirp (str target "/src"))
-    (fs/mkdirp (str target "/test"))
+  (make-common projname
     (render-file "Makefile" "lib/Makefile")
-    (render-file "test.sh" "common/test.sh")
-    (chmod "+x" (str target "/test.sh"))
     (render-file (str projname ".asd") "lib/lib.asd")
     (render-file "src/main.lisp" "lib/src/main.lisp")
     (render-file "src/package.lisp" "lib/src/package.lisp")
-    (render-file "test/test.lisp" "common/test/test.lisp")
-    (render-file "test/package.lisp" "common/test/package.lisp")
     (show-dir "LIB" target)))
 
 (defn make-app [projname]
-  (let [tldir (fs/lisp-toplevel-dir)
-        target (str tldir "/" projname)
-        render-file (partial render-and-write projname target)]
-    (when (.exists (io/file target))
-      (throw (FileAlreadyExistsException.
-              (format "Directory '%s' already exists; not overwriting."
-                      target))))
-    (fs/mkdirp target)
-    (fs/mkdirp (str target "/src"))
-    (fs/mkdirp (str target "/test"))
+  (make-common projname
     (render-file "Makefile" "app/Makefile")
-    (render-file "test.sh" "common/test.sh")
-    (chmod "+x" (str target "/test.sh"))
-    (render-file "build.sh" "app/build.sh")
-    (chmod "+x" (str target "/build.sh"))
+    (render-file (str projname ".asd") "app/app.asd")
     (render-file "src/main.lisp" "app/main.lisp")
     (render-file "src/package.lisp" "app/package.lisp")
-    (render-file "test/test.lisp" "common/test/test.lisp")
-    (render-file "test/package.lisp" "common/test/package.lisp")
-    (render-file (str projname ".asd") "app/app.asd")
+    (render-file "build.sh" "app/build.sh")
+    (chmod "+x" (str target "/build.sh"))
     (show-dir "APP" target)))
