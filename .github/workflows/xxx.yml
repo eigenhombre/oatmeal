@@ -1,13 +1,12 @@
-name: ReleaseAndDoThings
+name: CD
 on:
   push:
-    tags:
-      - '*'
-      
+   tags:
+     - '*'
 jobs:
-  release-ubuntu:
-    runs-on: ubuntu-latest
+  release-osx:
+    runs-on: macos-latest
     steps:
-    - name: Step1
-     run: echo "It Worked"
- 
+    - uses: actions/checkout@v2
+    - name: Build Release
+      run: echo TESTING
