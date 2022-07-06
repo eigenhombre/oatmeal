@@ -12,7 +12,7 @@ jobs:
       - name: Test Oatmeal
         run: oatmeal create app parentheses
         env:
-           LISP_HOME=.
+           LISP_HOME: .
       - name: Build app 
         working-directory: parentheses
         run: make
