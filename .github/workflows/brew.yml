@@ -1,0 +1,6 @@
+jobs:
+  build:
+    runs-on: macos-latest
+     steps:
+      - name: Build
+        run: echo OK
