@@ -9,3 +9,7 @@ jobs:
     steps:
       - name: Build
         run: brew install eigenhombre/brew/oatmeal
+      - name: Test Oatmeal
+        run: oatmeal create app parentheses
+      - name: Test App
+        run: ./parentheses
