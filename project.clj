@@ -15,4 +15,16 @@
              :kaocha {:dependencies [[lambdaisland/kaocha "1.0.887"]]}
              :dev {:plugins [[lein-bikeshed "0.5.2"]
                              [jonase/eastwood "0.9.9"]
-                             [lein-kibit "0.1.8"]]}})
+                             [lein-kibit "0.1.8"]
+                             [lein-shell "0.5.0"]]}}
+  :release-tasks [["vcs" "assert-committed"]
+                  ["test"]
+                  ["change" "version" "leiningen.release/bump-version"
+                   "release"]
+                  ["vcs" "commit"]
+                  ["vcs" "tag" "v" "--no-sign"]
+                  ["vcs" "push"]
+                  [["shell" "scripts/gh_release.sh"]]
+                  ["change" "version" "leiningen.release/bump-version"]
+                  ["vcs" "commit"]
+                  ["vcs" "push"]])
