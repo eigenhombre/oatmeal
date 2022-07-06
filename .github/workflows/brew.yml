@@ -13,9 +13,11 @@ jobs:
         run: oatmeal create app parentheses
         env:
            LISP_HOME: .
-      - name: Build app 
-        working-directory: parentheses
-        run: make
-      - name: Test App
-        working-directory: parentheses
-        run: ./parentheses
+      - name: Fetch Quicklisp
+        run: curl -s -o quicklisp.lisp http://beta.quicklisp.org/quicklisp.lisp
+#       - name: Build app 
+#         working-directory: parentheses
+#         run: make
+#       - name: Test App
+#         working-directory: parentheses
+#         run: ./parentheses
