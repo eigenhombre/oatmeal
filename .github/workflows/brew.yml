@@ -2,11 +2,10 @@ name: Build
 
 on:
   - workflow_dispatch
-  - push
 
 jobs:
   build:
     runs-on: macos-latest
     steps:
       - name: Build
-        run: echo OK
+        run: brew install eigenhombre/brew/oatmeal
