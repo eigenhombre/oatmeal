@@ -7,7 +7,10 @@
             [oatmeal.core :refer [execute-cmd]]
             [oatmeal.fs :refer [mkdirp]]
             [oatmeal.fs :as fs])
-  (:import [java.nio.file FileAlreadyExistsException]))
+  (:import [java.nio.file FileAlreadyExistsException]
+           (java.io File)))
+
+(declare thrown?)
 
 (defn- oatmeal-cmd [s]
   (execute-cmd (string/split s #"\s+")))
@@ -29,16 +32,18 @@
                  args
                  [:dir dirname])))
 
+(defn dir-path [^File f] (.getAbsolutePath f))
+
 (deftest e2etests-common
   (testing "projects"
     (doseq [kind [:lib :app]]
       (testing (str "Making a new " (name kind) " project")
         (let [success-reports (atom [])]
           (fs/with-tmp-dir d
-            (binding [oatmeal.fs/lisp-toplevel-dir
-                      (fn [] (.getAbsolutePath d))
+            (binding [oatmeal.fs/*lisp-toplevel-dir*
+                      (fn [] (dir-path d))
 
-                      oatmeal.build/report-success
+                      oatmeal.build/*report-success*
                       (fn [projtype projname]
                         (swap! success-reports conj
                                {:t projtype :n projname}))]
@@ -47,7 +52,7 @@
                   (mkdirp (str d "/baz"))
                   (testing "... exception is thrown"
                     (is (thrown? FileAlreadyExistsException
-                                 (oatmeal-cmd (str "create " (name kind) " baz"))))))
+                          (oatmeal-cmd (str "create " (name kind) " baz"))))))
                 (testing "It should create a directory called `foo`"
                   (oatmeal-cmd (str "create " (name kind) " foo"))
                   (testing "The project directory exists"
