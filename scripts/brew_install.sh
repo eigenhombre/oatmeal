@@ -4,6 +4,8 @@ prefix="$1"
 
 mkdir -p "$prefix/bin"
 
+lein uberjar
+
 cat <<EOF > oatmeal
 #!/usr/bin/env bash
 echo "I am roaring, hear me make oatmeal."
