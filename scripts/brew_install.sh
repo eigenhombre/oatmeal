@@ -5,10 +5,11 @@ prefix="$1"
 mkdir -p "$prefix/bin"
 
 lein uberjar
+cp target/uberjar/oatmeal.jar "$prefix/bin"
 
 cat <<EOF > oatmeal
 #!/usr/bin/env bash
-echo "I am roaring, hear me make oatmeal."
+java -jar "$prefix/bin/oatmeal.jar" $*
 EOF
 
 chmod 0755 oatmeal
