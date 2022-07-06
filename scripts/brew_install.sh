@@ -9,7 +9,7 @@ cp target/uberjar/oatmeal.jar "$prefix/bin"
 
 cat <<EOF > oatmeal
 #!/usr/bin/env bash
-java -jar "$prefix/bin/oatmeal.jar" $*
+java -jar "$prefix/bin/oatmeal.jar" $@
 EOF
 
 chmod 0755 oatmeal
