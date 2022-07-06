@@ -17,6 +17,8 @@ jobs:
         run: curl -s -o quicklisp.lisp http://beta.quicklisp.org/quicklisp.lisp
       - name: Add quicklisp
         run: sbcl --no-sysinit --no-userinit --load quicklisp.lisp --eval '(quicklisp-quickstart:install :path "quicklisp")' --quit
+      - name: Add QL to init file
+        run: echo | sbcl --load quicklisp/setup.lisp --eval '(ql:add-to-init-file)' --quit
       - name: Build app 
         working-directory: parentheses
         run: make
