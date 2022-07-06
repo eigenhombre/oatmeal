@@ -24,5 +24,5 @@
                   ["vcs" "commit"]
                   ["vcs" "tag" "v" "--no-sign"]
                   ["change" "version" "leiningen.release/bump-version"]
-                  ["vcs" "commit"]
+                  #_#_["vcs" "commit"]
                   ["vcs" "push"]])
