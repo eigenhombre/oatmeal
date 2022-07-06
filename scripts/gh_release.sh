@@ -7,7 +7,6 @@ echo "v$semver"
 
 gh release create v$semver --notes "$semver: scripted release"
 
-#sha=$(curl https://github.com/eigenhombre/oatmeal/archive/refs/tags/v$semver.tar.gz | sha256sum)
-curl https://github.com/eigenhombre/oatmeal/archive/refs/tags/v$semver.tar.gz > /tmp/x
-sha=$(sha256sum /tmp/x)
+sha=$(curl -L https://github.com/eigenhombre/oatmeal/archive/refs/tags/v$semver.tar.gz | sha256sum)
+
 echo "$semver : $sha"
