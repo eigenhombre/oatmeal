@@ -1,4 +1,4 @@
-(defproject oatmeal "0.0.13"
+(defproject oatmeal "0.0.13-SNAPSHOT"
   :description "A tool for working with Common Lisp projects"
   :url "http://github.com/eigenhombre/oatmeal"
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
@@ -24,6 +24,7 @@
                    "release"]
                   ["vcs" "commit"]
                   ["vcs" "tag" "v" "--no-sign"]
+                  ["vcs" "push"]
                   [["shell" "scripts/gh_release.sh"]]
                   ["change" "version" "leiningen.release/bump-version"]
                   ["vcs" "commit"]
