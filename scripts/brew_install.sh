@@ -3,11 +3,10 @@
 prefix="$1"
 
 mkdir -p "$prefix/bin"
-ls -al
 
 cat <<EOF > oatmeal
 #!/usr/bin/env bash
-echo "I am oatmeal, hear me roar."
+echo "I am roaring, hear me make oatmeal."
 EOF
 
 chmod 0755 oatmeal
