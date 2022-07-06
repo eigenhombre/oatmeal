@@ -7,9 +7,15 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-      - name: Build
+      - name: Build Oatmeal
         run: brew install eigenhombre/brew/oatmeal
       - name: Test Oatmeal
         run: oatmeal create app parentheses
+        env:
+           LISP_HOME=.
+      - name: Build app 
+        working-directory: parentheses
+        run: make
       - name: Test App
+        working-directory: parentheses
         run: ./parentheses
