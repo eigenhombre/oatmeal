@@ -19,9 +19,9 @@ doc: ${JARPATH}
 all: test ${JARPATH} doc install
 
 docker:
-	docker build -t "oatmeal" .
+	docker build --progress plain -t "oatmeal" .
 
 test:
 #       Switch to `lein test` if test fails in CI and you need more info:
-#	lein test
-	lein do kaocha, bikeshed, kibit, eastwood
+	#lein test
+	lein do test, bikeshed, kibit, eastwood
