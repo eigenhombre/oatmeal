@@ -13,26 +13,14 @@ I'm aware of `quickproject`, but I want to set things up a little
 differently and possibly eventually add some functionality around adding and removing
 dependencies.
 
-## Prerequisites
+## Install
 
-(On MacOS; your mileage may vary on other platforms.) First install
-Java and [Leiningen](https://leiningen.org/).  Then `brew install sbcl`.
+On Mac OS,
 
-## Building
+    brew install eigenhombre/brew/oatmeal
 
-    $ make
-    $ make install
-
-## Running
-
-    $ java -jar ~/bin/oatmeal.jar
-
-Or, add the following to your shell profile:
-
-    alias oatmeal="java -jar ~/bin/oatmeal.jar"
-
-And then just type `oatmeal` to invoke the command.
-
+So far Homebrew is the only package manager supported; PRs for others
+will be gratefully reviewed!
 
 ## Usage
 
@@ -52,10 +40,6 @@ executable files to be placed in.
 
 ```
 <!-- END OATMEAL USAGE -->
-
-To update this file (`README.md`), simply:
-
-    make doc
 
 ## Example
 
@@ -84,6 +68,20 @@ To update this file (`README.md`), simply:
     $  ./cranky
     Hello World
     $
+
+## Building Locally
+
+(On MacOS; your mileage may vary on other platforms.) First install
+Java and [Leiningen](https://leiningen.org/).  Then `brew install sbcl`.
+
+    $ make
+    $ make install
+
+    $ java -jar ~/bin/oatmeal.jar
+
+To update this file (`README.md`), simply:
+
+    make doc
 
 ## License
 
