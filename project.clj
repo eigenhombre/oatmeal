@@ -23,6 +23,7 @@
                    "release"]
                   ["vcs" "commit"]
                   ["vcs" "tag" "v" "--no-sign"]
+                  [["shell" "scripts/gh_release.sh"]]
                   ["change" "version" "leiningen.release/bump-version"]
                   ["vcs" "commit"]
                   ["vcs" "push"]])
