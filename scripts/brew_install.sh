@@ -3,6 +3,7 @@
 prefix="$1"
 
 mkdir -p "$prefix/bin"
+ls -al
 
 cat <<EOF > oatmeal
 #!/usr/bin/env bash
