@@ -1,4 +1,4 @@
-(defproject oatmeal "0.0.11"
+(defproject oatmeal "0.0.12-SNAPSHOT"
   :description "A tool for working with Common Lisp projects"
   :url "http://github.com/eigenhombre/oatmeal"
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
