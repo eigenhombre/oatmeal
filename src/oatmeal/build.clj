@@ -10,8 +10,11 @@
         (render (fs/resource-file src-file)
                 {:projname projname})))
 
+(def ^:dynamic report-success
+  (fn [projtype projname] (println (format "%s %s" projtype projname))))
+
 (defn- show-dir [projtype projname]
-  (println (format "%s %s" projtype projname)))
+  (report-success projtype projname))
 
 (defmacro make-project [projname & body]
   `(let [tldir# (fs/lisp-toplevel-dir)

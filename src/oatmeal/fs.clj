@@ -10,8 +10,7 @@
          ;; FIXME: Eliminate double-evaluation:
          (fs/delete-dir ~dir-file)))))
 
-(defn lisp-toplevel-dir []
-  (System/getProperty "user.dir"))
+(def ^:dynamic lisp-toplevel-dir (fn [] (System/getProperty "user.dir")))
 
 (defn resource-file [path]
   (slurp (io/resource path)))
