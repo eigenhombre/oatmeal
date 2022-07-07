@@ -1,0 +1,27 @@
+name: Homebrew
+
+on:
+  - workflow_dispatch
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Build Oatmeal
+        run: brew install eigenhombre/brew/oatmeal
+      - name: Test Oatmeal
+        run: oatmeal create app parentheses
+        env:
+           LISP_HOME: .
+      - name: Fetch Quicklisp
+        run: curl -s -o quicklisp.lisp http://beta.quicklisp.org/quicklisp.lisp
+      - name: Add quicklisp
+        run: sbcl --no-sysinit --no-userinit --load quicklisp.lisp --eval '(quicklisp-quickstart:install :path "quicklisp")' --quit
+      - name: Add QL to init file
+        run: echo | sbcl --load quicklisp/setup.lisp --eval '(ql:add-to-init-file)' --quit
+      - name: Build app 
+        working-directory: parentheses
+        run: make
+      - name: Test App
+        working-directory: parentheses
+        run: ./parentheses
