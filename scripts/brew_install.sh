@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 prefix="$1"
+scriptdir=$(dirname "$0")
 
 mkdir -p "$prefix/bin"
 
@@ -14,5 +15,4 @@ EOF
 
 chmod 0755 oatmeal
 cp oatmeal "$prefix/bin"
-
-
+cp $scriptdir/quicklisp-install.sh "$prefix/bin/oatmeal-quicklisp-install"
