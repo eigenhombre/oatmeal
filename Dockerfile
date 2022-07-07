@@ -1,9 +1,8 @@
 FROM adoptopenjdk:11-jre-hotspot
 
-RUN apt-get -qq -y update
-RUN apt-get -qq -y upgrade
-
-RUN apt-get install -qq -y leiningen sbcl make
+RUN apt-get -y update
+RUN apt-get -y upgrade
+RUN apt-get install -y make sbcl leiningen
 
 WORKDIR /home/janice
 

@@ -23,5 +23,6 @@ docker:
 
 test:
 #       Switch to `lein test` if test fails in CI and you need more info:
-	#lein test
-	lein do test, bikeshed, kibit, eastwood
+#	lein test
+# Otherwise I prefer Kaocha because of the descriptive test output:
+	lein do kaocha, bikeshed, kibit, eastwood

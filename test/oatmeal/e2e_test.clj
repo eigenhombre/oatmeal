@@ -5,8 +5,7 @@
             [clojure.test :refer [deftest testing is]]
             [me.raynes.fs :as rfs]
             [oatmeal.core :refer [execute-cmd]]
-            [oatmeal.fs :refer [mkdirp]]
-            [oatmeal.fs :as fs])
+            [oatmeal.fs :refer [mkdirp] :as fs])
   (:import [java.nio.file FileAlreadyExistsException]
            (java.io File)))
 
@@ -40,7 +39,7 @@
       (testing (str "Making a new " (name kind) " project")
         (let [success-reports (atom [])]
           (fs/with-tmp-dir d
-            (binding [oatmeal.fs/*lisp-toplevel-dir*
+            (binding [fs/*lisp-toplevel-dir*
                       (fn [] (dir-path d))
 
                       oatmeal.build/*report-success*
@@ -148,6 +147,7 @@
                           (is (zero? exit))
                           (is (empty? err))
                           (is (not (exists "/foo/foo"))))))))))
-            (is (= [{:t (-> kind name .toUpperCase)
-                     :n (str d "/foo")}]
-                   @success-reports))))))))
+            (testing "Success was reported correctly"
+              (is (= [{:t (-> kind name .toUpperCase)
+                       :n (str d "/foo")}]
+                     @success-reports)))))))))
