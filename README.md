@@ -7,11 +7,8 @@
 
 ![build](https://github.com/eigenhombre/oatmeal/actions/workflows/build.yml/badge.svg)
 
-A small tool for generating Common Lisp projects.
-
-I'm aware of `quickproject`, but I want to set things up a little
-differently and possibly eventually add some functionality around adding and removing
-dependencies.
+A small tool for generating Common Lisp projects, including unit tests
+and building stand-alone applications.
 
 ## Install
 
@@ -40,6 +37,21 @@ executable files to be placed in.
 
 ```
 <!-- END OATMEAL USAGE -->
+
+### Quicklisp Setup
+
+Oatmeal apps are set up to rely on
+[Quicklisp](https://www.quicklisp.org/beta/) for managing
+dependencies.  Quicklisp needs some setup before use.  The script
+`oatmeal-quicklisp-install` downloads Quicklisp, installs it into a
+directory `quicklisp` in your home directory, and adds it to your SBCL
+init file.  If you are using a different Common Lisp implementation
+(e.g. CCL or Clisp rather than SBCL), or want a different location for
+the `quicklisp` directory, you'll have to do that setup manually.
+
+You can run `oatmeal` before `oatmeal-quicklisp-install` (which only
+need be run once), but you'll have to run the latter script at least
+once before building an Oatmeal-generated app.
 
 ## Example
 
