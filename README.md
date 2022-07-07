@@ -53,35 +53,87 @@ You can run `oatmeal` before `oatmeal-quicklisp-install` (which only
 need be run once), but you'll have to run the latter script at least
 once before building an Oatmeal-generated app.
 
+### Unit Testing
+
+Upon generating a library or application, an example test can be found
+in the file `test/test.lisp`.  The minimalist
+[1AM](https://github.com/lmj/1am) test framework is used.  `make test`
+will run the unit tests.
+
 ## Example
 
-    $  oatmeal create app cranky
-    APP cranky in directory /Users/jacobsen/Programming/Lisp/common-lisp
-    $  cd cranky
-    $  ls
-    Makefile	build.sh	main.lisp
-    $  make
-    ./build.sh
-    This is SBCL 2.1.8, an implementation of ANSI Common Lisp.
+### Creating an app
+
+    $ cd /tmp
+    $ oatmeal create app cranky
+    APP /private/tmp/cranky
+
+### Running unit tests
+
+    $ cd cranky
+
+    $ make test
+    ./test.sh
+    This is SBCL 2.2.6, an implementation of ANSI Common Lisp.
     More information about SBCL is available at <http://www.sbcl.org/>.
 
     SBCL is free software, provided as is, with absolutely no warranty.
     It is mostly in the public domain; some portions are provided under
     BSD-style licenses.  See the CREDITS and COPYING files in the
     distribution for more information.
+    To load "1am":
+      Load 1 ASDF system:
+        1am
+    ; Loading "1am"
+
+    To load "cranky":
+      Load 1 ASDF system:
+        cranky
+    ; Loading "cranky"
+    [package cranky]
+    ; compiling file "/Users/jacobsen/Programming/Lisp/common-lisp/cranky/test/package.lisp" (written 02 JUL 2022 08:26:35 AM):
+
+    ; wrote /Users/jacobsen/.cache/common-lisp/sbcl-2.2.6-macosx-arm64/Users/jacobsen/Programming/Lisp/common-lisp/cranky/test/package-tmp5GEXGEG5.fasl
+    ; compilation finished in 0:00:00.001
+    ; compiling file "/Users/jacobsen/Programming/Lisp/common-lisp/cranky/test/test.lisp" (written 02 JUL 2022 08:26:35 AM):
+
+    ; wrote /Users/jacobsen/.cache/common-lisp/sbcl-2.2.6-macosx-arm64/Users/jacobsen/Programming/Lisp/common-lisp/cranky/test/test-tmpAR3FSGEY.fasl
+    ; compilation finished in 0:00:00.001
+    CRANKY.TEST::EXAMPLE.
+    Success: 1 test, 1 check.
+
+### Building the executable
+
+    $ make
+    ./build.sh
+    This is SBCL 2.2.6, an implementation of ANSI Common Lisp.
+    More information about SBCL is available at <http://www.sbcl.org/>.
+
+    SBCL is free software, provided as is, with absolutely no warranty.
+    It is mostly in the public domain; some portions are provided under
+    BSD-style licenses.  See the CREDITS and COPYING files in the
+    distribution for more information.
+    To load "cranky":
+      Load 1 ASDF system:
+        cranky
+    ; Loading "cranky"
+
     [undoing binding stack and other enclosing state... done]
     [performing final GC... done]
     [saving current Lisp image into cranky:
-    writing 1728 bytes from the read-only space at 0x300000000
+    writing 1840 bytes from the read-only space at 0x300000000
     writing 1840 bytes from the static space at 0x300200000
     writing 0 bytes from the immobile space at 0x300300000
-    writing 41418752 bytes from the dynamic space at 0x7003000000
+    writing 42139648 bytes from the dynamic space at 0x7003000000
     done]
-    $  ./cranky
-    Hello World
+
+### Running the executable
+
+    $ ./cranky
+    Thanks for using cranky!
     $
 
-## Building Locally
+## Building Oatmeal Locally
 
 (On MacOS; your mileage may vary on other platforms.) First install
 Java and [Leiningen](https://leiningen.org/).  Then `brew install sbcl`.
