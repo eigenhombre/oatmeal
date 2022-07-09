@@ -149,7 +149,7 @@ To update this file (`README.md`), simply:
 
 ## License
 
-Copyright © 2021 John Jacobsen
+Copyright © 2021-2022 John Jacobsen
 
 This program and the accompanying materials are made available under the
 terms of the Eclipse Public License 2.0 which is available at
