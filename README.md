@@ -58,7 +58,7 @@ once before building an Oatmeal-generated app.
 Upon generating a library or application, an example test can be found
 in the file `test/test.lisp`.  The minimalist
 [1AM](https://github.com/lmj/1am) test framework is used.  `make test`
-will run the unit tests.
+in the generated project will run the unit tests.
 
 ## Example
 
