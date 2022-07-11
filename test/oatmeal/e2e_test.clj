@@ -11,13 +11,13 @@
 
 (declare thrown?)
 
-(defn- oatmeal-cmd [s]
+(defn ^:private oatmeal-cmd [s]
   (execute-cmd (string/split s #"\s+")))
 
-(defn- contents-as-str [dir path-in-dir]
+(defn ^:private contents-as-str [dir path-in-dir]
   (slurp (str dir path-in-dir)))
 
-(defn- exists-in-dir [dir path-in-dir]
+(defn ^:private exists-in-dir [dir path-in-dir]
   (->> (str dir path-in-dir)
        io/file
        .exists))
