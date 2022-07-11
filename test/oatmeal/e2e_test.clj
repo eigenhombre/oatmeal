@@ -14,7 +14,7 @@
 (defn- oatmeal-cmd [s]
   (execute-cmd (string/split s #"\s+")))
 
-(defn- contents [dir path-in-dir]
+(defn- contents-as-str [dir path-in-dir]
   (slurp (str dir path-in-dir)))
 
 (defn- exists-in-dir [dir path-in-dir]
@@ -50,7 +50,7 @@
                         (swap! success-reports conj
                                {:t projtype :n projname}))]
               (let [exists (partial exists-in-dir d)
-                    contents (partial contents d)]
+                    contents (partial contents-as-str d)]
                 (testing "The directory already exists"
                   (mkdirp (str d "/baz"))
                   (testing "... exception is thrown"
@@ -63,7 +63,7 @@
                   (testing "There is a Makefile"
                     (is (exists "/foo/Makefile")))
                   (testing "There is a .gitignore"
-                    (is (.contains (contents "/foo/.gitignore")
+                    (is (.contains ^String (contents "/foo/.gitignore")
                                    "**/*.asd")))
                   (testing "There is a main.lisp"
                     (is (exists "/foo/src/main.lisp")))
