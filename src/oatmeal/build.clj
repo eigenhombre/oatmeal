@@ -33,6 +33,7 @@
      (fs/mkdirp (str target# "/src"))
      (fs/mkdirp (str target# "/test"))
      (render-file# "test.sh" "common/test.sh")
+     (render-file# ".gitignore" "common/gitignore")
      (chmod "+x" (str target# "/test.sh"))
      (render-file# "test/test.lisp" "common/test/test.lisp")
      (render-file# "test/package.lisp" "common/test/package.lisp")

@@ -10,7 +10,7 @@
                 :components ((:file "package")
                              (:file "main" :depends-on ("package"))))))
 
-(asdf:defsystem :{{projname}}/test
+(defsystem :{{projname}}/test
   :description "FIXME"
   :author "FIXME"
   :license "FIXME"
