@@ -40,11 +40,6 @@
          ~render-file (partial render-and-write ~projname ~target)]
      ~@body))
 
-;; These statements break linting. However, they are mandatory to make
-;; the Cursive plugin for the IntelliJ editor work. So, you can
-;; uncomment them when changing this code:
-#_(declare render-file)
-#_(declare target)
 
 (defn make-lib [projname]
   (with-setup-vars projname target render-file

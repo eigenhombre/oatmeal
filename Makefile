@@ -12,6 +12,7 @@ clean:
 install:
 	mkdir -p ${BINPATH}
 	cp ${JARPATH} ${BINPATH}
+	cp scripts/oatmeal ${BINPATH}
 
 doc: ${JARPATH}
 	java -jar ${JARPATH} update readme

@@ -1,5 +1,5 @@
 (ns oatmeal.core
-  (:require [docopt.core :as docopt]
+  (:require [clojure.core.match :refer [match]]
             [oatmeal.build :as b]
             [oatmeal.readme :as r])
   (:gen-class))
@@ -10,25 +10,22 @@ Usage: oatmeal create lib <libname>
        oatmeal create app <appname>
        oatmeal update readme
 
-Sources will be created in a subdirectory of the current working
-directory. If the directory `./<libname|appname>` already
-exists, we will not overwrite its contents.
+If the environment variable LISP_HOME is defined, sources will be
+created there.  Otherwise, sources will be created in a subdirectory
+of the current working directory. If the directory
+`./<libname|appname>` already exists, we will not overwrite its
+contents.
 
 For \"make install\" to work correctly, set an environment BINDIR for
 executable files to be placed in.
 ")
 
 (defn execute-cmd [args]
-  (docopt/docopt usage
-                 args
-                 (fn [{:strs [update readme
-                              <libname>
-                              <appname>]}]
-                   (cond
-                     (and update readme) (r/update-readme! usage)
-                     <libname> (b/make-lib <libname>)
-                     <appname> (b/make-app <appname>)
-                     :else (println usage)))))
+  (match [(vec args)]
+    [["update" "readme"]] (r/update-readme! usage)
+    [["create" "lib" libname]] (b/make-lib libname)
+    [["create" "app" appname]] (b/make-app appname)
+    :else (println usage)))
 
 (defn -main [& args]
   (try

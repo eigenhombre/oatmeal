@@ -28,9 +28,11 @@ Usage: oatmeal create lib <libname>
        oatmeal create app <appname>
        oatmeal update readme
 
-Sources will be created in a subdirectory of the current working
-directory. If the directory `./<libname|appname>` already
-exists, we will not overwrite its contents.
+If the environment variable LISP_HOME is defined, sources will be
+created there.  Otherwise, sources will be created in a subdirectory
+of the current working directory. If the directory
+`./<libname|appname>` already exists, we will not overwrite its
+contents.
 
 For "make install" to work correctly, set an environment BINDIR for
 executable files to be placed in.
