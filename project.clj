@@ -9,7 +9,7 @@
                  [me.raynes/fs "1.4.6"]]
   :main ^:skip-aot oatmeal.core
   :uberjar-name "oatmeal.jar"
-  :target-path "target/%s"
+  :target-path "target/"
   :aliases {"kaocha" ["with-profile" "+kaocha" "run" "-m" "kaocha.runner"]}
   :profiles {:uberjar {:aot :all}
              :kaocha {:dependencies [[lambdaisland/kaocha "1.0.887"]]}

@@ -1,7 +1,7 @@
 .PHONY: all docker test
 
 BINPATH = ${HOME}/bin
-JARPATH = target/uberjar/oatmeal.jar
+JARPATH = target/oatmeal.jar
 
 ${JARPATH}: src/oatmeal/*.clj project.clj resources/*
 	lein uberjar
