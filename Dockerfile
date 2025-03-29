@@ -1,8 +1,15 @@
-FROM adoptopenjdk:11-jre-hotspot
+FROM debian
 
-RUN apt-get -y update
-RUN apt-get -y upgrade
-RUN apt-get install -y make sbcl leiningen
+RUN apt-get update
+RUN apt-get install -y make wget bzip2 leiningen sbcl build-essential texinfo curl
+RUN apt-get clean
+
+RUN wget https://sourceforge.net/projects/sbcl/files/sbcl/2.5.2/sbcl-2.5.2-source.tar.bz2 -O /tmp/sbcl-source.tar.bz2 && \
+    mkdir /tmp/sbcl && \
+    tar jxvf /tmp/sbcl-source.tar.bz2 -C /tmp/sbcl/ && \
+    cd /tmp/sbcl/sbcl-2.5.2 && \
+    sh make.sh && \
+    sh install.sh
 
 WORKDIR /home/janice
 
@@ -25,3 +32,4 @@ WORKDIR /home/janice/oatmeal
 
 COPY . /home/janice/oatmeal
 RUN make test
+RUN lein uberjar

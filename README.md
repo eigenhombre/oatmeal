@@ -10,6 +10,10 @@
 A small tool for generating Common Lisp projects, including unit tests
 and building stand-alone applications.
 
+*N.B.*: I am currently using
+[Steelcut](https://github.com/eigenhombre/steelcut), my Common Lisp
+implementation of this project, for new Lisp projects.
+
 ## Install
 
 On Mac OS,

@@ -12,7 +12,7 @@
   :target-path "target/"
   :aliases {"kaocha" ["with-profile" "+kaocha" "run" "-m" "kaocha.runner"]}
   :profiles {:uberjar {:aot :all}
-             :kaocha {:dependencies [[lambdaisland/kaocha "1.0.887"]]}
+             :kaocha {:dependencies [[lambdaisland/kaocha "1.91.1392"]]}
              :dev {:plugins [[lein-bikeshed "0.5.2"]
                              [jonase/eastwood "0.9.9"]
                              [lein-kibit "0.1.8"]
